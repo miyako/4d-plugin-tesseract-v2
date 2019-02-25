@@ -31,7 +31,7 @@ c.f.
 
 #### Options Specific to this Plugin
 
-``clearGlobalCache``: boolean call ``ClearPersistentCache()`` before Init()  
+``clearGlobalCache``: boolean call ``ClearPersistentCache()`` before ``Init``()  
 ``oem``: number set ``OcrEngineMode``   
 ``lang``: string set language  
 ``format``: string specify image format by file extension   

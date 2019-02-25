@@ -27,6 +27,8 @@ c.f.
 [SSE](https://en.wikipedia.org/wiki/Streaming_SIMD_Extensions)  
 [AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions)  
 
+**Note**: Jpeg2000 (.jp2) support is disabled (probably not thread-safe)
+
 ---
 
 ### Custom Options (Plugin)

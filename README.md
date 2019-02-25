@@ -29,7 +29,41 @@ c.f.
 
 **Note**: Jpeg2000 (.jp2) support is disabled (probably not thread-safe)
 
----
+```
+result:=Tesseract (image;options)
+```
+
+Parameter|Type|Description
+------------|------------|----
+image|BLOB|
+options|TEXT|``JSON`` (output contains list of languages)
+result|TEXT|``JSON``
+
+A ``languages``property is added to ``options`` on return.
+
+``languages.loaded[]``:  ``GetAvailableLanguagesAsVector()``  
+``languages.available[]``: ``GetLoadedLanguagesAsVector()``  
+
+### Examples
+
+```
+$path:=Get 4D folder(Current resources folder)+"images"+Folder separator+"hindi-to-english.jpeg"
+C_BLOB($data)
+DOCUMENT TO BLOB($path;$data)
+
+C_OBJECT($option)
+$option:=New object
+$option.lang:="eng+hin"
+$option.oem:=1
+$option.tessdata:=Get 4D folder(Current resources folder)+"tessdata"+Folder separator
+
+$json:=JSON Stringify($option)
+
+$result:=JSON Parse(Tesseract ($data;$json);Is object)
+$option:=JSON Parse($json;Is object)
+
+ALERT($result.results[0].text)
+```
 
 ### Custom Options (Plugin)
 

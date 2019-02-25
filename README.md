@@ -67,10 +67,10 @@ ALERT($result.results[0].text)
 
 ### Custom Options (Plugin)
 
-``clearGlobalCache``: boolean call ``ClearPersistentCache()`` before ``Init``()  
-``oem``: number set ``OcrEngineMode``   
-``lang``: string set language  
-``format``: string specify image format by file extension   
-``tessdata``: string specify ``TESSDATA_PREFIX`` by system path representation   
+* ``clearGlobalCache``: boolean call ``ClearPersistentCache()`` before ``Init()``  
+* ``oem``: number set ``OcrEngineMode``   
+* ``lang``: string set language  
+* ``format``: string specify image format by file extension   
+* ``tessdata``: string specify ``TESSDATA_PREFIX`` by system path representation   
 
 [Standard Options](standard-options.md)

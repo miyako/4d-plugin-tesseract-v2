@@ -2,6 +2,16 @@
 
 OCR by [Tesseract 4.x](https://github.com/tesseract-ocr/tesseract)
 
+### Platform
+
+| carbon | cocoa | win32 | win64 |
+|:------:|:-----:|:---------:|:---------:|
+||<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|
+
+### Version
+
+<img src="https://cloud.githubusercontent.com/assets/1725068/18940648/2192ddba-8645-11e6-864d-6d5692d55717.png" width="32" height="32" /> <img src="https://user-images.githubusercontent.com/1725068/41266195-ddf767b2-6e30-11e8-9d6b-2adf6a9f57a5.png" width="32" height="32" />
+
 ## Syntax
 
 ```
@@ -21,7 +31,18 @@ info|TEXT|``JSON``
 ``info.SIM.isAVX512FAvailable``: false  
 ``info.SIM.isAVX2Available``: true  
 ``info.SIM.isAVXAvailable``: true  
-``info.SIM.isSSEAvailable``: true  
+``info.SIM.isSSEAvailable``: true 
+
+* Windows: 
+
+``info.version``: 4.1.0-rc1  
+``info.leptonica``: leptonica-1.78.0  
+``info.libraries``: libgif 5.1.4 : libjpeg 6b (libjpeg-turbo 1.5.3) : libpng 1.6.34 : libtiff 4.0.9 : zlib 1.2.11 : libwebp 1.0.0    
+``info.SIM.isAVX512BWAvailable``: false  
+``info.SIM.isAVX512FAvailable``: false  
+``info.SIM.isAVX2Available``: true  
+``info.SIM.isAVXAvailable``: true  
+``info.SIM.isSSEAvailable``: true 
 
 c.f. 
 

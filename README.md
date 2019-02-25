@@ -66,6 +66,8 @@ ALERT($result.results[0].text)
 ```
 
 
+<img width="510" alt="2019-02-25 18 21 03" src="https://user-images.githubusercontent.com/1725068/53327068-60fb4380-392a-11e9-84e5-6a6e896192c8.png">
+
 
 
 

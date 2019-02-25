@@ -65,33 +65,6 @@ $option:=JSON Parse($json;Is object)
 ALERT($result.results[0].text)
 ```
 
-### Case Study
-
-```
-C_OBJECT($option)
-$option:=New object
-$option.lang:="eng+jpn"
-  //$option.oem:=0
-  //$option["tessedit_char_blacklist"]:="①②③④⑤⑥⑦⑧⑨"
-
-$option.tessdata:=Get 4D folder(Current resources folder)+"tessdata"+Folder separator
-
-$json:=JSON Stringify($option)
-
-$result:=JSON Parse(Tesseract ($data;$json);Is object)
-$option:=JSON Parse($json;Is object)
-
-ALERT($result.results[0].text)
-```
-
-New engine (Tesseract 4.x)
-
-<img width="510" alt="2019-02-25 18 24 00" src="https://user-images.githubusercontent.com/1725068/53327156-943dd280-392a-11e9-8d5c-c2e4fcf22156.png">
-
-Legacy engine (OEM=0, no blacklist)
-
-<img width="510" alt="2019-02-25 18 21 03" src="https://user-images.githubusercontent.com/1725068/53327068-60fb4380-392a-11e9-84e5-6a6e896192c8.png">
-
 ### Custom Options (Plugin)
 
 ``clearGlobalCache``: boolean call ``ClearPersistentCache()`` before ``Init``()  

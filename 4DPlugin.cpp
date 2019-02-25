@@ -281,6 +281,7 @@ void Tesseract(sLONG_PTR *pResult, PackagePtr pParams)
     bool clearGlobalCache = false;
     
     Json::Value root;
+    Json::Value result;
     
     std::vector<JSONCPP_STRING> optionNames;
     std::vector<JSONCPP_STRING> optionValues;
@@ -356,9 +357,7 @@ void Tesseract(sLONG_PTR *pResult, PackagePtr pParams)
             STRING& string = languages[i];
             root["languages"]["loaded"][i] = string.string();
         }
-        
-        Json::Value result;
-        
+
         Pix *image = NULL;
         Pixa *images = NULL;
         
@@ -415,19 +414,17 @@ void Tesseract(sLONG_PTR *pResult, PackagePtr pParams)
                       _PA_YieldAbsolute, 0x0001);
         }
         
-        setJsonReturnValue(returnValue, result);
-        
         api.End();
         
         setJsonReturnValue(Param2, root);
         Param2.toParamAtIndex(pParams, 2);
     }
     
+    setJsonReturnValue(returnValue, result);
     returnValue.setReturn(pResult);
 }
 
-void readImage(tesseract::TessBaseAPI *api, Pix *image, Json::Value& value, Json::ArrayIndex i,
-       void (*_PA_YieldAbsolute)(void), size_t interval){
+void readImage(tesseract::TessBaseAPI *api, Pix *image, Json::Value& value, Json::ArrayIndex i, void (*_PA_YieldAbsolute)(void), size_t interval){
     
     if(api)
     {

@@ -65,7 +65,7 @@ $option:=JSON Parse($json;Is object)
 ALERT($result.results[0].text)
 ```
 
-### Custom Options (Plugin)
+#### Custom Options 
 
 * ``clearGlobalCache``: boolean call ``ClearPersistentCache()`` before ``Init()``  
 * ``oem``: number set ``OcrEngineMode``   
@@ -73,4 +73,6 @@ ALERT($result.results[0].text)
 * ``format``: string specify image format by file extension   
 * ``tessdata``: string specify ``TESSDATA_PREFIX`` by system path representation   
 
-[Standard Options](standard-options.md)
+See also 
+
+#### [Standard Options](standard-options.md)

@@ -1,6 +1,6 @@
 # 4d-plugin-tesseract-v2
 
-
+OCR by [Tesseract 4.x](https://github.com/tesseract-ocr/tesseract)
 
 ## Syntax
 

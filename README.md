@@ -26,3 +26,13 @@ c.f.
 [SIMD](https://en.wikipedia.org/wiki/SIMD)  
 [SSE](https://en.wikipedia.org/wiki/Streaming_SIMD_Extensions)  
 [AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions)  
+
+---
+
+#### Options Specific to this Plugin
+
+``clearGlobalCache``: boolean call ``ClearPersistentCache()`` before Init()  
+``oem``: number set ``OcrEngineMode``   
+``lang``: string set language  
+``format``: string specify image format by file extension   
+``tessdata``: string specify ``TESSDATA_PREFIX`` by system path representation   

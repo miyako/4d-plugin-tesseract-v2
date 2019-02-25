@@ -243,6 +243,8 @@ JSONCPP_STRING convertPath(const char *path){
         }
         
     }
+	#else
+	convertedPath = path;
     #endif
     return convertedPath;
 }

@@ -101,6 +101,7 @@ ALERT($result.results[0].text)
 * ``format``: string specify image format by file extension   
 * ``tessdata``: string specify ``TESSDATA_PREFIX`` by system path representation   
 * ``page``: number specify page number for TIFF  
+* ``input``: string use path instead of BLOB  
 
 **Note**: By default all pages are processed for TIFF
 

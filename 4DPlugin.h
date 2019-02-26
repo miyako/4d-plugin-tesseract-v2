@@ -37,22 +37,38 @@
 extern "C" {
 #endif  /* __cplusplus */
     
-LEPT_DLL extern char * getLeptonicaVersion ();
-LEPT_DLL extern void lept_free ( void *ptr );
-LEPT_DLL extern char * getImagelibVersions ();
+    LEPT_DLL extern char * getLeptonicaVersion ();
+    LEPT_DLL extern void lept_free ( void *ptr );
+    LEPT_DLL extern char * getImagelibVersions ();
     
-LEPT_DLL extern PIXA * pixaReadMemMultipageTiff ( const l_uint8 *data, size_t size );
-LEPT_DLL extern PIX * pixReadMemTiff ( const l_uint8 *cdata, size_t size, l_int32 n );
+    LEPT_DLL extern PIXA * pixaReadMemMultipageTiff ( const l_uint8 *data, size_t size );
+    LEPT_DLL extern PIXA * pixaReadMultipageTiff ( const char *filename );
     
-LEPT_DLL extern PIX * pixReadMemWebP ( const l_uint8 *filedata, size_t filesize );
-LEPT_DLL extern PIX * pixReadMemBmp ( const l_uint8 *cdata, size_t size );
-LEPT_DLL extern PIX * pixReadMemGif ( const l_uint8 *cdata, size_t size );
-LEPT_DLL extern PIX * pixReadMemPng ( const l_uint8 *filedata, size_t filesize );
-LEPT_DLL extern PIX * pixReadMemPnm ( const l_uint8 *data, size_t size );
-LEPT_DLL extern PIX * pixReadMemJpeg ( const l_uint8 *data, size_t size, l_int32 cmflag, l_int32 reduction, l_int32 *pnwarn, l_int32 hint );
+    LEPT_DLL extern PIX * pixReadMemTiff ( const l_uint8 *cdata, size_t size, l_int32 n );
+    LEPT_DLL extern PIX * pixReadStreamTiff ( FILE *fp, l_int32 n );
     
-LEPT_DLL extern PIX * pixReadMem ( const l_uint8 *data, size_t size );
-LEPT_DLL extern void pixDestroy ( PIX **ppix );
+    LEPT_DLL extern PIX * pixReadMemWebP ( const l_uint8 *filedata, size_t filesize );
+    LEPT_DLL extern PIX * pixReadStreamWebP ( FILE *fp );
+    
+    LEPT_DLL extern PIX * pixReadMemBmp ( const l_uint8 *cdata, size_t size );
+    LEPT_DLL extern PIX * pixReadStreamBmp ( FILE *fp );
+    
+    LEPT_DLL extern PIX * pixReadMemGif ( const l_uint8 *cdata, size_t size );
+    LEPT_DLL extern PIX * pixReadStreamGif ( FILE *fp );
+    
+    LEPT_DLL extern PIX * pixReadMemPng ( const l_uint8 *filedata, size_t filesize );
+    LEPT_DLL extern PIX * pixReadStreamPng ( FILE *fp );
+    
+    LEPT_DLL extern PIX * pixReadMemPnm ( const l_uint8 *data, size_t size );
+    LEPT_DLL extern PIX * pixReadStreamPnm ( FILE *fp );
+    
+    LEPT_DLL extern PIX * pixReadMemJpeg ( const l_uint8 *data, size_t size, l_int32 cmflag, l_int32 reduction, l_int32 *pnwarn, l_int32 hint );
+    LEPT_DLL extern PIX * pixReadStreamJpeg ( FILE *fp, l_int32 cmapflag, l_int32 reduction, l_int32 *pnwarn, l_int32 hint );
+    
+    LEPT_DLL extern PIX * pixReadMem ( const l_uint8 *data, size_t size );
+    LEPT_DLL extern PIX * pixRead ( const char *filename );
+    
+    LEPT_DLL extern void pixDestroy ( PIX **ppix );
         
 #ifdef __cplusplus
 }

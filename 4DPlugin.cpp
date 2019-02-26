@@ -144,7 +144,11 @@ typedef enum {
     TESSERACT_OPTION_FORMAT = 3,
     TESSERACT_OPTION_PAGE = 4,
     TESSERACT_OPTION_OEM = 5,
-    TESSERACT_OPTION_CLEAR_GLOBAL_CACHE = 6
+    TESSERACT_OPTION_CLEAR_GLOBAL_CACHE = 6,
+    TESSERACT_OPTION_IN = 7,
+    TESSERACT_OPTION_OUT = 8,
+    TESSERACT_OPTION_TIMEOUT = 9,
+//    TESSERACT_OPTION_TEXTONLY = 10
     
 }tesseract_option_t;
 
@@ -208,7 +212,11 @@ tesseract_option_t get_tesseract_option(Json::Value::const_iterator n){
         CHECKOPT("page",TESSERACT_OPTION_PAGE)
         CHECKOPT("oem",TESSERACT_OPTION_OEM)
         CHECKOPT("clearGlobalCache",TESSERACT_OPTION_CLEAR_GLOBAL_CACHE)
-        
+        CHECKOPT("input",TESSERACT_OPTION_IN)
+        CHECKOPT("output",TESSERACT_OPTION_OUT)
+        CHECKOPT("timeout",TESSERACT_OPTION_TIMEOUT)
+//        CHECKOPT("textonly",TESSERACT_OPTION_TEXTONLY)
+
     get_tesseract_option_exit:
         (void)0;
     }
@@ -216,7 +224,24 @@ tesseract_option_t get_tesseract_option(Json::Value::const_iterator n){
     return v;
 }
 
-JSONCPP_STRING convertPath(const char *path){
+FILE *ufopen(const char *filename, const char *mode){
+#ifdef _WIN32
+    wchar_t    buf[_MAX_PATH];
+    wchar_t    _wfmode[99];    //should be enough
+    if(MultiByteToWideChar(CP_UTF8, 0, mode, -1, (LPWSTR)_wfmode, 99))
+    {
+        if(MultiByteToWideChar(CP_UTF8, 0, filename, -1, (LPWSTR)buf, _MAX_PATH))
+        {
+            return _wfopen((const wchar_t *)buf, (const wchar_t *)_wfmode);
+        }
+    }
+    return  fopen(filename, mode);
+#else
+    return fopen(filename, mode);
+#endif
+}
+
+JSONCPP_STRING convertPath(const char *path, bool asDirectory = TRUE){
     JSONCPP_STRING convertedPath;
     #if VERSIONMAC
     if(path)
@@ -233,8 +258,10 @@ JSONCPP_STRING convertPath(const char *path){
                     std::vector<uint8_t> buf(size);
                     [p getFileSystemRepresentation:(char *)&buf[0] maxLength:size];
                     convertedPath = JSONCPP_STRING((char *)&buf[0]);
-                    if(convertedPath.at(convertedPath.size() - 1) != '/')
-                        convertedPath += '/';
+                    if(asDirectory){
+                        if(convertedPath.at(convertedPath.size() - 1) != '/')
+                            convertedPath += '/';
+                    }
                     [p release];
                 }
                 [u release];
@@ -257,10 +284,12 @@ void readImage(tesseract::TessBaseAPI *api,
     
 void Tesseract(sLONG_PTR *pResult, PackagePtr pParams)
 {
-    /* Show libtiff errors and warnings on console (not in GUI). */
+    /* for windows: Show libtiff errors and warnings on console (not in GUI) */
     TIFFSetErrorHandler(Win32ErrorHandler);
     TIFFSetWarningHandler(Win32WarningHandler);
 
+    size_t interval = 150; /* yield every n characters */
+    
     FOURD::C_BLOB Param1;
     C_TEXT Param2;
     C_TEXT returnValue;
@@ -281,12 +310,21 @@ void Tesseract(sLONG_PTR *pResult, PackagePtr pParams)
     
     int page = TESSERACT_ALL_PAGES;
     bool clearGlobalCache = false;
+    bool usePathIn = false;
+    bool usePathOut = false;
+    unsigned int timeout_ms = 5000;
+    bool textonly = false;
     
     Json::Value root;
     Json::Value result;
     
+    result["results"] = Json::arrayValue;
+    
     std::vector<JSONCPP_STRING> optionNames;
     std::vector<JSONCPP_STRING> optionValues;
+    
+    JSONCPP_STRING pathIn;
+    JSONCPP_STRING pathOut;
     
     if(json_parse(Param2, root))
     {
@@ -310,10 +348,23 @@ void Tesseract(sLONG_PTR *pResult, PackagePtr pParams)
                     case TESSERACT_OPTION_OEM:
                         oem = (tesseract::OcrEngineMode)(it->asUInt() < tesseract::OEM_COUNT ? it->asUInt() : tesseract::OEM_DEFAULT);
                         break;
-                        
+                    case TESSERACT_OPTION_IN:
+                        usePathIn = true;
+                        pathIn = convertPath(it->asString().c_str(), FALSE);
+                        break;
+                    case TESSERACT_OPTION_OUT:
+                        usePathOut = true;
+                        pathOut = convertPath(it->asString().c_str(), FALSE);
+                        break;
+                    case TESSERACT_OPTION_TIMEOUT:
+                        timeout_ms = it->asUInt();
+                        break;
                     case TESSERACT_OPTION_CLEAR_GLOBAL_CACHE:
                         clearGlobalCache = it->asBool();
                         break;
+//                    case TESSERACT_OPTION_TEXTONLY:
+//                        textonly = it->asBool();
+//                        break;
                         
                     default:
                     {
@@ -363,40 +414,118 @@ void Tesseract(sLONG_PTR *pResult, PackagePtr pParams)
         Pix *image = NULL;
         Pixa *images = NULL;
         
-        const l_uint8 *data = (const l_uint8 *)Param1.getBytesPtr();
-        size_t size = (size_t)Param1.getBytesLength();
+        FILE *fp = NULL;
         
-        switch (format) {
-            case TESSERACT_FORMAT_TIFF:
-                if(page == TESSERACT_ALL_PAGES)
+        if(usePathIn){
+            
+            if(usePathOut){
+                
+                root["exportPdf"] = Json::objectValue;
+                
+                /* export pdf */
+                const char* retry_config = nullptr;
+                tesseract::TessPDFRenderer renderer(
+                                                    (const char *)pathOut.c_str(),
+                                                    (const char*)api.GetDatapath(),
+                                                    (bool)textonly);
+                root["exportPdf"]["success"] = api.ProcessPages(pathIn.c_str(), retry_config, timeout_ms, &renderer);
+                
+            }else
+            {
+                fp = ufopen(pathIn.c_str(), "rb");
+                
+                if(fp)
                 {
-                    images = pixaReadMemMultipageTiff(data, size);
-                }else{
-                    image = pixReadMemTiff (data, size, page);
+                    switch (format) {
+                        case TESSERACT_FORMAT_TIFF:
+                            if(page != TESSERACT_ALL_PAGES)
+                            {
+                                image = pixReadStreamTiff (fp, page);
+                            }
+                            break;
+                        case TESSERACT_FORMAT_PNM:
+                            image = pixReadStreamPnm(fp);
+                            break;
+                        case TESSERACT_FORMAT_PNG:
+                            image = pixReadStreamPng(fp);
+                            break;
+                        case TESSERACT_FORMAT_GIF:
+                            image = pixReadStreamGif(fp);
+                            break;
+                        case TESSERACT_FORMAT_BMP:
+                            image = pixReadStreamBmp(fp);
+                            break;
+                        case TESSERACT_FORMAT_WEBP:
+                            image = pixReadStreamWebP(fp);
+                            break;
+                        case TESSERACT_FORMAT_JPEG:
+                            image = pixReadStreamJpeg(fp, 0, 1, NULL, 0);
+                            break;
+                        default:
+                            
+                            break;
+                    }
+                    
+                    fclose(fp);
+                    fp = NULL;
+                    
+                    if(!image)
+                    {
+                        switch (format) {
+                            case TESSERACT_FORMAT_UNDEFINED:
+                                image = pixRead(pathIn.c_str());
+                                break;
+                            case TESSERACT_FORMAT_TIFF:
+                                if(page == TESSERACT_ALL_PAGES)
+                                {
+                                    images = pixaReadMultipageTiff(pathIn.c_str());
+                                }
+                                break;
+                                
+                        }
+                    }
                 }
-                break;
-                
-            case TESSERACT_FORMAT_PNM:
-                image = pixReadMemPnm(data, size);
-            case TESSERACT_FORMAT_PNG:
-                image = pixReadMemPng(data, size);
-            case TESSERACT_FORMAT_GIF:
-                image = pixReadMemGif(data, size);
-            case TESSERACT_FORMAT_BMP:
-                image = pixReadMemBmp(data, size);
-            case TESSERACT_FORMAT_WEBP:
-                image = pixReadMemWebP(data, size);
-            case TESSERACT_FORMAT_JPEG:
-                image = pixReadMemJpeg(data, size, 0, 1, NULL, 0);
-                
-            default:
-                image = pixReadMem(data, size);
-                break;
+            }
+            
+        }
+        else
+        {
+            const l_uint8 *data = (const l_uint8 *)Param1.getBytesPtr();
+            size_t size = (size_t)Param1.getBytesLength();
+            switch (format) {
+                case TESSERACT_FORMAT_TIFF:
+                    if(page == TESSERACT_ALL_PAGES)
+                    {
+                        images = pixaReadMemMultipageTiff(data, size);
+                    }else{
+                        image = pixReadMemTiff (data, size, page);
+                    }
+                    break;
+                case TESSERACT_FORMAT_PNM:
+                    image = pixReadMemPnm(data, size);
+                    break;
+                case TESSERACT_FORMAT_PNG:
+                    image = pixReadMemPng(data, size);
+                    break;
+                case TESSERACT_FORMAT_GIF:
+                    image = pixReadMemGif(data, size);
+                    break;
+                case TESSERACT_FORMAT_BMP:
+                    image = pixReadMemBmp(data, size);
+                    break;
+                case TESSERACT_FORMAT_WEBP:
+                    image = pixReadMemWebP(data, size);
+                    break;
+                case TESSERACT_FORMAT_JPEG:
+                    image = pixReadMemJpeg(data, size, 0, 1, NULL, 0);
+                    break;
+                default:
+                    image = pixReadMem(data, size);
+                    break;
+            }
         }
         
         void (*_PA_YieldAbsolute)(void) = PA_YieldAbsolute;
-        
-        result["results"] = Json::arrayValue;
         
         if((images) && (images->n))
         {
@@ -405,7 +534,7 @@ void Tesseract(sLONG_PTR *pResult, PackagePtr pParams)
                 readImage(&api, images->pix[i],
                           result["results"],
                           i,
-                          _PA_YieldAbsolute, 0x0001);
+                          _PA_YieldAbsolute, interval);
             }
             
         }else if(image)
@@ -413,9 +542,9 @@ void Tesseract(sLONG_PTR *pResult, PackagePtr pParams)
             readImage(&api, image,
                       result["results"],
                       0,
-                      _PA_YieldAbsolute, 0x0001);
+                      _PA_YieldAbsolute, interval);
         }
-        
+
         api.End();
         
         setJsonReturnValue(Param2, root);

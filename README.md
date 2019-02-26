@@ -57,6 +57,19 @@ c.f.
 * leptonica and tesseract are patched to support unicode paths on Windows  
 * tesseract is patched to "yield absolute" during OCR  
 
+Make an "empty" call to obtain list of languages
+
+```
+C_OBJECT($option)
+$option:=New object
+$option.tessdata:=Get 4D folder(Current resources folder)+"tessdata"+Folder separator
+$json:=JSON Stringify($option)
+$result:=JSON Parse(Tesseract ($data;$json);Is object)
+$option:=JSON Parse($json;Is object)
+$available_count:=$option.languages.available.length
+$loaded_count:=$option.languages.loaded.length  //eng
+```
+
 ```
 result:=Tesseract (image;options)
 ```

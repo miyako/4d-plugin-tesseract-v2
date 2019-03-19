@@ -460,6 +460,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					i386,
+					x86_64,
+				);
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
@@ -492,6 +496,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.4D.tesseract-v2";
 				PRODUCT_NAME = Tesseract;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx10.13;
 				SECTORDER_FLAGS = "";
 				USER_HEADER_SEARCH_PATHS = "include/leptonica include/tesseract include/json include/tiff";
 				WARNING_CFLAGS = (
@@ -508,6 +513,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					i386,
+					x86_64,
+				);
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
@@ -537,6 +546,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.4D.tesseract-v2";
 				PRODUCT_NAME = Tesseract;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx10.13;
 				SECTORDER_FLAGS = "";
 				USER_HEADER_SEARCH_PATHS = "include/leptonica include/tesseract include/json include/tiff";
 				WARNING_CFLAGS = (
@@ -553,6 +563,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					i386,
+					x86_64,
+				);
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
@@ -581,6 +595,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.4D.tesseract-v2";
 				PRODUCT_NAME = Tesseract;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx10.13;
 				SECTORDER_FLAGS = "";
 				USER_HEADER_SEARCH_PATHS = "include/leptonica include/tesseract include/json include/tiff";
 				WARNING_CFLAGS = (
@@ -595,7 +610,10 @@
 		42D60B440A9DDBC8002ABB42 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = (
+					i386,
+					x86_64,
+				);
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -628,7 +646,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OBJROOT = "$(SRCROOT)/build";
-				SDKROOT = macosx;
+				SDKROOT = macosx10.13;
 				SYMROOT = "$(SRCROOT)/$(PRODUCT_NAME).4dbase/Plugins";
 				USER_HEADER_SEARCH_PATHS = "include/leptonica include/tesseract include/tiff";
 			};
@@ -637,7 +655,10 @@
 		42D60B450A9DDBC8002ABB42 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = (
+					i386,
+					x86_64,
+				);
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -670,7 +691,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OBJROOT = "$(SRCROOT)/build";
-				SDKROOT = macosx;
+				SDKROOT = macosx10.13;
 				SYMROOT = "$(SRCROOT)/$(PRODUCT_NAME).4dbase/Plugins";
 				USER_HEADER_SEARCH_PATHS = "include/leptonica include/tesseract include/tiff";
 			};
@@ -679,7 +700,10 @@
 		42D60B460A9DDBC8002ABB42 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = (
+					i386,
+					x86_64,
+				);
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -710,7 +734,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.13;
 				SYMROOT = "$(SRCROOT)/$(PRODUCT_NAME).4dbase/Plugins";
 				USER_HEADER_SEARCH_PATHS = "include/leptonica include/tesseract include/tiff";
 			};

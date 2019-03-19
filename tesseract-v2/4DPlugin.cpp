@@ -148,7 +148,13 @@ typedef enum {
     TESSERACT_OPTION_IN = 7,
     TESSERACT_OPTION_OUT = 8,
     TESSERACT_OPTION_TIMEOUT = 9,
-//    TESSERACT_OPTION_TEXTONLY = 10
+    TESSERACT_OPTION_GET_COMPONENT_IMAGES = 10,
+    TESSERACT_OPTION_OSD = 11,
+    TESSERACT_OPTION_GET_BLOCK = 12,
+    TESSERACT_OPTION_GET_PARAGRAPH = 13,
+    TESSERACT_OPTION_GET_TEXTLINE = 14,
+    TESSERACT_OPTION_GET_WORD = 15,
+    TESSERACT_OPTION_GET_SYMBOL = 16
     
 }tesseract_option_t;
 
@@ -215,7 +221,13 @@ tesseract_option_t get_tesseract_option(Json::Value::const_iterator n){
         CHECKOPT("input",TESSERACT_OPTION_IN)
         CHECKOPT("output",TESSERACT_OPTION_OUT)
         CHECKOPT("timeout",TESSERACT_OPTION_TIMEOUT)
-//        CHECKOPT("textonly",TESSERACT_OPTION_TEXTONLY)
+        CHECKOPT("getComponentImages",TESSERACT_OPTION_GET_COMPONENT_IMAGES)
+        CHECKOPT("osd",TESSERACT_OPTION_OSD)
+        CHECKOPT("getBlock",TESSERACT_OPTION_GET_BLOCK)
+        CHECKOPT("getParagraph",TESSERACT_OPTION_GET_PARAGRAPH)
+        CHECKOPT("getTextLine",TESSERACT_OPTION_GET_TEXTLINE)
+        CHECKOPT("getWord",TESSERACT_OPTION_GET_WORD)
+        CHECKOPT("getSymbol",TESSERACT_OPTION_GET_SYMBOL)
 
     get_tesseract_option_exit:
         (void)0;
@@ -280,7 +292,8 @@ void readImage(tesseract::TessBaseAPI *api,
                Pix *image,
                Json::Value& value,
                Json::ArrayIndex i,
-               void (*_PA_YieldAbsolute)(void), size_t interval);
+               void (*_PA_YieldAbsolute)(void), size_t interval,
+               bool getComponentImages, bool osd, tesseract::PageIteratorLevel level, bool getBounds);
     
 void Tesseract(sLONG_PTR *pResult, PackagePtr pParams)
 {
@@ -313,7 +326,16 @@ void Tesseract(sLONG_PTR *pResult, PackagePtr pParams)
     bool usePathIn = false;
     bool usePathOut = false;
     unsigned int timeout_ms = 5000;
+    bool getComponentImages = false;
     bool textonly = false;
+    bool osd = false;
+    bool getBlock = false;
+    bool getParagraph = false;
+    bool getTextLine = false;
+    bool getWord = false;
+    bool getSymbol = false;
+    tesseract::PageIteratorLevel level = tesseract::RIL_TEXTLINE;
+    bool getBounds = false;
     
     Json::Value root;
     Json::Value result;
@@ -362,10 +384,37 @@ void Tesseract(sLONG_PTR *pResult, PackagePtr pParams)
                     case TESSERACT_OPTION_CLEAR_GLOBAL_CACHE:
                         clearGlobalCache = it->asBool();
                         break;
-//                    case TESSERACT_OPTION_TEXTONLY:
-//                        textonly = it->asBool();
-//                        break;
-                        
+                    case TESSERACT_OPTION_GET_COMPONENT_IMAGES:
+                        getComponentImages = it->asBool();
+                        break;
+                    case TESSERACT_OPTION_OSD:
+                        osd = it->asBool();
+                        break;
+                    case TESSERACT_OPTION_GET_BLOCK:
+                        getBlock = it->asBool();
+                        level = tesseract::RIL_BLOCK;
+                        getBounds = true;
+                        break;
+                    case TESSERACT_OPTION_GET_PARAGRAPH:
+                        getParagraph = it->asBool();
+                        level = tesseract::RIL_PARA;
+                        getBounds = true;
+                        break;
+                    case TESSERACT_OPTION_GET_TEXTLINE:
+                        getTextLine = it->asBool();
+                        level = tesseract::RIL_TEXTLINE;
+                        getBounds = true;
+                        break;
+                    case TESSERACT_OPTION_GET_WORD:
+                        getWord = it->asBool();
+                        level = tesseract::RIL_WORD;
+                        getBounds = true;
+                        break;
+                    case TESSERACT_OPTION_GET_SYMBOL:
+                        getSymbol = it->asBool();
+                        level = tesseract::RIL_SYMBOL;
+                        getBounds = true;
+                        break;
                     default:
                     {
                         optionNames.push_back(it.name());
@@ -385,6 +434,10 @@ void Tesseract(sLONG_PTR *pResult, PackagePtr pParams)
     int err = api.Init(tessdata.c_str(), lang.c_str(), oem);
  
     if(!err){
+        
+        if(osd){
+            api.SetPageSegMode(tesseract::PSM_AUTO_OSD);
+        }
         
         for(size_t i = 0 ; i < optionNames.size() ; ++i)
         {
@@ -534,7 +587,7 @@ void Tesseract(sLONG_PTR *pResult, PackagePtr pParams)
                 readImage(&api, images->pix[i],
                           result["results"],
                           i,
-                          _PA_YieldAbsolute, interval);
+                          _PA_YieldAbsolute, interval, getComponentImages, osd, level, getBounds);
             }
             
         }else if(image)
@@ -542,7 +595,7 @@ void Tesseract(sLONG_PTR *pResult, PackagePtr pParams)
             readImage(&api, image,
                       result["results"],
                       0,
-                      _PA_YieldAbsolute, interval);
+                      _PA_YieldAbsolute, interval, getComponentImages, osd, level, getBounds);
         }
 
         api.End();
@@ -555,7 +608,8 @@ void Tesseract(sLONG_PTR *pResult, PackagePtr pParams)
     returnValue.setReturn(pResult);
 }
 
-void readImage(tesseract::TessBaseAPI *api, Pix *image, Json::Value& value, Json::ArrayIndex i, void (*_PA_YieldAbsolute)(void), size_t interval){
+void readImage(tesseract::TessBaseAPI *api, Pix *image, Json::Value& value, Json::ArrayIndex i, void (*_PA_YieldAbsolute)(void), size_t interval, bool getComponentImages,
+               bool osd, tesseract::PageIteratorLevel level, bool getBounds){
     
     if(api)
     {
@@ -565,10 +619,87 @@ void readImage(tesseract::TessBaseAPI *api, Pix *image, Json::Value& value, Json
             {
                 api->SetImage(image);
                 
-                char *t = api->GetUTF8Text(_PA_YieldAbsolute, interval);
-                value[i] = Json::objectValue;
-                value[i]["text"] = t;
-                delete [] t;
+                if(osd)
+                {
+                    api->Recognize(0);
+                    tesseract::PageIterator* it = api->AnalyseLayout();
+                    tesseract::Orientation orientation;
+                    tesseract::WritingDirection direction;
+                    tesseract::TextlineOrder order;
+                    float deskew;
+                    it->Orientation(&orientation, &direction, &order, &deskew);
+                    value[i]["deskew"] = deskew;
+                    value[i]["order"] = order;
+                    value[i]["orientation"] = orientation;
+                    value[i]["direction"] = direction;
+    
+                }else
+                {
+                    if(getComponentImages)
+                    {
+                        Boxa* boxes = api->GetComponentImages(level, true, NULL, NULL);
+                        value[i] = Json::arrayValue;
+                        for (int j = 0; j < boxes->n; j++) {
+                            BOX* box = boxaGetBox(boxes, j, L_CLONE);
+                            api->SetRectangle(box->x, box->y, box->w, box->h);
+                            char *t = api->GetUTF8Text();
+                            int conf = api->MeanTextConf();
+                            value[i][j] = Json::objectValue;
+                            value[i][j]["x"] = box->x;
+                            value[i][j]["y"] = box->y;
+                            value[i][j]["width"] = box->w;
+                            value[i][j]["height"] = box->h;
+                            value[i][j]["text"] = t;
+                            value[i][j]["confidence"] = conf;
+                            delete [] t;
+                        }
+                        
+                    }else{
+                        
+                        if(getBounds){
+                            
+                            api->Recognize(0);
+                            tesseract::ResultIterator* ri = api->GetIterator();
+                            if (ri != 0) {
+                                int j = 0;
+                                value[i] = Json::arrayValue;
+                                do {
+                                    const char* t = ri->GetUTF8Text(level);
+                                    float conf = ri->Confidence(level);
+                                    
+                                    int x1, y1, x2, y2;
+                                    ri->BoundingBox(level, &x1, &y1, &x2, &y2);
+                                    
+                                    value[i][j] = Json::objectValue;
+                                    value[i][j]["text"] = t;
+                                    value[i][j]["confidence"] = conf;
+                                    value[i][j]["left"] = x1;
+                                    value[i][j]["top"] = y1;
+                                    value[i][j]["right"] = x2;
+                                    value[i][j]["bottom"] = y2;
+                                    
+                                    j++;
+                                    
+                                    delete[] t;
+                                    
+                                } while (ri->Next(level));
+                            }
+                            
+                        }else{
+                            
+                            char *t = api->GetUTF8Text(_PA_YieldAbsolute, interval);
+                            int conf = api->MeanTextConf();
+                            value[i] = Json::objectValue;
+                            value[i]["text"] = t;
+                            value[i]["confidence"] = conf;
+                            delete [] t;
+                            
+                        }
+
+                    }
+                    
+                }
+   
             }
             pixDestroy(&image);
         }

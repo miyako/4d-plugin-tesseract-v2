@@ -69,7 +69,9 @@ extern "C" {
     LEPT_DLL extern PIX * pixRead ( const char *filename );
     
     LEPT_DLL extern void pixDestroy ( PIX **ppix );
-        
+    
+    LEPT_DLL extern BOX * boxaGetBox ( BOXA *boxa, l_int32 index, l_int32 accessflag );
+    
 #ifdef __cplusplus
 }
 #endif  /* __cplusplus */

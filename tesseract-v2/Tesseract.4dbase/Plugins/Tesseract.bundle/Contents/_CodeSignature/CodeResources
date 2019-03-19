@@ -100,7 +100,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			5DCgRTi/ZNObZO0hMA5IgYQVAqc=
+			/eh+nJ0NWNTlvbO92MRS1WrT3nk=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -380,11 +380,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			5DCgRTi/ZNObZO0hMA5IgYQVAqc=
+			/eh+nJ0NWNTlvbO92MRS1WrT3nk=
 			</data>
 			<key>hash2</key>
 			<data>
-			GyP+hjUdc+8Oubsod3jo37GhG11OaTlUhKvum+tki+w=
+			iXoCbrajNeullYZcm4v7BXntIHYS0i98BZSYbPojuPk=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -404,22 +404,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			I63ehmwF72unIWsyUVG/7HOCdSc=
+			GQgFLueEathUmefCKC7zNZfEwg8=
 			</data>
 			<key>hash2</key>
 			<data>
-			dEks85IfpkmechedydkQ24mWUZLYPaVXxpC5eE6tRnE=
+			R+0B54HsySkmrBnfC3TpBKTny7zln1dmh1gIc0OpuKY=
 			</data>
 		</dict>
 		<key>Windows64/Tesseract.4DX</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			7yGd5uMmfJsYNPeZcDW5nHq3sHg=
+			hE8VG3X3B2QrbImCdBm8Sbb7xvQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			9zenmei6ooSCrE3vGxnR4PAYtzuh0gb8DhfWVk8tQpE=
+			GMjDdqpwwrDXQjoVFkLm0Ozlyc2/vXqX5cZ64LmFI00=
 			</data>
 		</dict>
 		<key>manifest.json</key>

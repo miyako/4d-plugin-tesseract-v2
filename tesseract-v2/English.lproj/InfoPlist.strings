@@ -1,5 +1,5 @@
 /* Localized versions of Info.plist keys */
 
 CFBundleName = "Tesseract";
-CFBundleShortVersionString = "1.0.2";
-CFBundleGetInfoString = "Tesseract version 1.0.2, Copyright 2019 miyako.";
+CFBundleShortVersionString = "1.0.3";
+CFBundleGetInfoString = "Tesseract version 1.0.3, Copyright 2019 miyako.";

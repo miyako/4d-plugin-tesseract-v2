@@ -114,8 +114,19 @@ ALERT($result.results[0].text)
 * ``format``: string specify image format by file extension   
 * ``tessdata``: string specify ``TESSDATA_PREFIX`` by system path representation   
 * ``page``: number specify page number for TIFF  
+* ``getSymbol``: get bounds by symbols  
+* ``getWord``: get bounds by words  
+* ``getTextLine``: get bounds by lines  
+* ``getParagraph``: get bounds by paragraphs  
+* ``getBlock``: get bounds by blocks    
+* ``getComponentImages``: get component images      
+* ``osd``: orientation and script detection  
 
 **Note**: By default all pages are processed for TIFF  
+
+``osd`` and ``getComponentImages`` are mutually exclusive.  
+
+``getSymbol``, ``getWord``, ``getTextLine``, ``getParagraph`` and ``getBlock`` are mutually exclusive.  
 
 * ``input``: string use path instead of BLOB  
 * ``output``: string create seachable PDF ``input`` must be specified as well  

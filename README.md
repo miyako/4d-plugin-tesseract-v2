@@ -16,7 +16,7 @@ OCR by [Tesseract 4.x](https://github.com/tesseract-ocr/tesseract)
 
 ### Releases
 
-[1.0.3](https://github.com/miyako/4d-plugin-tesseract-v2/releases/tag/1.0.3-carbon)
+[1.0.4](https://github.com/miyako/4d-plugin-tesseract-v2/releases/tag/1.0.4-carbon)
 
 ## Syntax
 

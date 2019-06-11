@@ -100,7 +100,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			/eh+nJ0NWNTlvbO92MRS1WrT3nk=
+			+Po+cHmqEgEJt+gtUfqKa26AHLI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -380,11 +380,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			/eh+nJ0NWNTlvbO92MRS1WrT3nk=
+			+Po+cHmqEgEJt+gtUfqKa26AHLI=
 			</data>
 			<key>hash2</key>
 			<data>
-			iXoCbrajNeullYZcm4v7BXntIHYS0i98BZSYbPojuPk=
+			NGpSLseNmuFqZBTToU9IyWPyRqhwQlThix+U6V9KKR4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -426,10 +426,10 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			ctRwviJxM8LBa2aPfDXwc6NJRHw=
+			1wyQIWxCStqtbWn1sw+URGNVfPI=
 			</data>
 			<key>requirement</key>
-			<string>identifier manifest and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y69CWUC25B</string>
+			<string>identifier manifest and anchor apple generic and certificate leaf[subject.CN] = "Mac Developer: keisuke miyako (4W9UT59D3B)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
 		</dict>
 	</dict>
 	<key>rules</key>

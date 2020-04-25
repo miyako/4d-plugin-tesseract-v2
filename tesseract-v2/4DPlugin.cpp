@@ -236,7 +236,7 @@ tesseract_option_t get_tesseract_option(Json::Value::const_iterator n){
     return v;
 }
 
-FILE *ufopen(const char *filename, const char *mode){
+static FILE *ufopen(const char *filename, const char *mode){
 #ifdef _WIN32
     wchar_t    buf[_MAX_PATH];
     wchar_t    _wfmode[99];    //should be enough
@@ -686,14 +686,17 @@ void readImage(tesseract::TessBaseAPI *api, Pix *image, Json::Value& value, Json
                             }
                             
                         }else{
-                            
-                            char *t = api->GetUTF8Text(_PA_YieldAbsolute, interval);
-                            int conf = api->MeanTextConf();
-                            value[i] = Json::objectValue;
-                            value[i]["text"] = t;
-                            value[i]["confidence"] = conf;
-                            delete [] t;
-                            
+                            try{
+                                char *t = api->GetUTF8Text(_PA_YieldAbsolute, interval);
+                                int conf = api->MeanTextConf();
+                                value[i] = Json::objectValue;
+                                value[i]["text"] = t;
+                                value[i]["confidence"] = conf;
+                                delete [] t;
+                            }catch(...){
+                                
+                            }
+  
                         }
 
                     }

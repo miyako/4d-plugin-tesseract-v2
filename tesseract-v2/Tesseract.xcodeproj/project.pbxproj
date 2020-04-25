@@ -54,13 +54,14 @@
 		D13116F41A03C7AF00DE1322 /* ARRAY_DATE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D13116F21A03C7AF00DE1322 /* ARRAY_DATE.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
 		D13116F51A03C7AF00DE1322 /* ARRAY_DATE.h in Headers */ = {isa = PBXBuildFile; fileRef = D13116F31A03C7AF00DE1322 /* ARRAY_DATE.h */; };
 		D134D4AC1A030BA0008D14EF /* manifest.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = D134D4A91A030B06008D14EF /* manifest.json */; };
-		D1880F40222388C200566C1A /* libleptonica.1.78.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1880F3E222388C200566C1A /* libleptonica.1.78.0.a */; };
-		D1880F41222388C200566C1A /* libtesseract.4.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1880F3F222388C200566C1A /* libtesseract.4.1.0.a */; };
 		D1880F452223895B00566C1A /* libtiff.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1880F422223895B00566C1A /* libtiff.a */; };
 		D1880F462223895B00566C1A /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1880F432223895B00566C1A /* libz.a */; };
 		D1880F472223895B00566C1A /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1880F442223895B00566C1A /* libjpeg.a */; };
 		D1880F49222389EC00566C1A /* libwebp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1880F48222389EC00566C1A /* libwebp.a */; };
 		D1880F4B22238A0800566C1A /* libpng16.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1880F4A22238A0800566C1A /* libpng16.a */; };
+		D1AF54C12454194A0049F360 /* libtesseract.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1AF54B6245409750049F360 /* libtesseract.a */; };
+		D1AF54C42454196E0049F360 /* libcurl.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D1AF54C32454196E0049F360 /* libcurl.tbd */; };
+		D1AF54C524541A6B0049F360 /* libleptonica.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1AF54B7245409750049F360 /* libleptonica.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -135,6 +136,12 @@
 		D1880F442223895B00566C1A /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = a/libjpeg.a; sourceTree = "<group>"; };
 		D1880F48222389EC00566C1A /* libwebp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebp.a; path = a/libwebp.a; sourceTree = "<group>"; };
 		D1880F4A22238A0800566C1A /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng16.a; path = a/libpng16.a; sourceTree = "<group>"; };
+		D1AF54B6245409750049F360 /* libtesseract.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtesseract.a; path = a/libtesseract.a; sourceTree = "<group>"; };
+		D1AF54B7245409750049F360 /* libleptonica.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libleptonica.a; path = a/libleptonica.a; sourceTree = "<group>"; };
+		D1AF54BA24540A180049F360 /* libtesseract.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtesseract.5.dylib; path = dylib/libtesseract.5.dylib; sourceTree = "<group>"; };
+		D1AF54BD245413FB0049F360 /* libtesseract_ccutil_la-strngs.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = "libtesseract_ccutil_la-strngs.o"; path = "a/libtesseract_ccutil_la-strngs.o"; sourceTree = "<group>"; };
+		D1AF54BF245414650049F360 /* libtesseract_ccutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtesseract_ccutil.a; path = a/libtesseract_ccutil.a; sourceTree = "<group>"; };
+		D1AF54C32454196E0049F360 /* libcurl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurl.tbd; path = usr/lib/libcurl.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +149,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1AF54C524541A6B0049F360 /* libleptonica.a in Frameworks */,
+				D1AF54C42454196E0049F360 /* libcurl.tbd in Frameworks */,
+				D1AF54C12454194A0049F360 /* libtesseract.a in Frameworks */,
 				D1169E17222418ED00E0B1DD /* libgif.a in Frameworks */,
 				D1169E1522238D2A00E0B1DD /* libjsoncpp.a in Frameworks */,
 				D1880F4B22238A0800566C1A /* libpng16.a in Frameworks */,
@@ -149,8 +159,6 @@
 				D1880F452223895B00566C1A /* libtiff.a in Frameworks */,
 				D1880F462223895B00566C1A /* libz.a in Frameworks */,
 				D1880F472223895B00566C1A /* libjpeg.a in Frameworks */,
-				D1880F40222388C200566C1A /* libleptonica.1.78.0.a in Frameworks */,
-				D1880F41222388C200566C1A /* libtesseract.4.1.0.a in Frameworks */,
 				D13116C71A03B5B600DE1322 /* AppKit.framework in Frameworks */,
 				D130064F12F02D9700702C0E /* Cocoa.framework in Frameworks */,
 			);
@@ -282,6 +290,12 @@
 		D1880F3D222388C200566C1A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D1AF54C32454196E0049F360 /* libcurl.tbd */,
+				D1AF54BF245414650049F360 /* libtesseract_ccutil.a */,
+				D1AF54BD245413FB0049F360 /* libtesseract_ccutil_la-strngs.o */,
+				D1AF54BA24540A180049F360 /* libtesseract.5.dylib */,
+				D1AF54B7245409750049F360 /* libleptonica.a */,
+				D1AF54B6245409750049F360 /* libtesseract.a */,
 				D1169E16222418ED00E0B1DD /* libgif.a */,
 				D1169E1422238D2A00E0B1DD /* libjsoncpp.a */,
 				D1880F4A22238A0800566C1A /* libpng16.a */,
@@ -433,7 +447,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "USER_NAME=keisuke.miyako@4d.com\nUUID=`uuidgen | tr -d - | tr -d '\\n' | tr '[:upper:]' '[:lower:]'`\nDEVELOPER_ID=`security find-identity -p codesigning -v | egrep 'Developer ID Application[^\"]+' -o`\nPRODUCT_PATH=\"$CODESIGNING_FOLDER_PATH\"\nxattr -cr \"$PRODUCT_PATH\"\ncodesign --remove-signature \"$PRODUCT_PATH\"\ncodesign --verbose --deep --timestamp --force --sign \"$DEVELOPER_ID\" \"$PRODUCT_PATH\"\nDMG_PATH=\"$PROJECT_DIR/$PRODUCT_NAME.dmg\"\nZIP_PATH=\"$PROJECT_DIR/$PRODUCT_NAME.zip\"\nrm \"$DMG_PATH\"\nhdiutil create -format UDBZ -plist -srcfolder \"$PRODUCT_PATH\" \"$DMG_PATH\"\necho \"xcrun stapler staple \\\"$PRODUCT_PATH\\\"\"\necho \"hdiutil create -format UDBZ -plist -srcfolder  \\\"$PRODUCT_PATH\\\" \\\"$DMG_PATH\\\" \"\necho \"ditto -c -k --keepParent \\\"$PRODUCT_PATH\\\" \\\"$ZIP_PATH\\\" \"\necho \"spctl -a -vv -t install \\\"$PRODUCT_PATH\\\" \"\nxcrun altool --notarize-app --file \"$DMG_PATH\" --username \"$USER_NAME\" --password \"@keychain:altool\" --primary-bundle-id $PRODUCT_BUNDLE_IDENTIFIER.$UUID\nrm -f \"$ZIP_PATH\"\nrm -f \"$DMG_PATH\"\n";
+			shellScript = "if test \"$CONFIGURATION\" == 'Deployment'; then\n\n    USER_NAME=keisuke.miyako@4d.com\n    UUID=`uuidgen | tr -d - | tr -d '\\n' | tr '[:upper:]' '[:lower:]'`\n    DEVELOPER_ID=`security find-identity -p codesigning -v | egrep 'Developer ID Application[^\"]+' -o`\n    PRODUCT_PATH=\"$CODESIGNING_FOLDER_PATH\"\n    \n    #clean\n    xattr -cr \"$PRODUCT_PATH\"\n    codesign --remove-signature \"$PRODUCT_PATH\"\n    \n    #sign\n    codesign --verbose --deep --timestamp --force --sign \"$DEVELOPER_ID\" \"$PRODUCT_PATH\"\n    \n    #archive\n    DMG_PATH=\"$PROJECT_DIR/$PRODUCT_NAME.dmg\"\n    ZIP_PATH=\"$PROJECT_DIR/$PRODUCT_NAME.zip\" #for windows\n    rm -f \"$DMG_PATH\"\n    hdiutil create -format UDBZ -plist -srcfolder \"$PRODUCT_PATH\" \"$DMG_PATH\"\n    rm -f \"$ZIP_PATH\"\n    ditto -c -k --keepParent \"$PRODUCT_PATH\" \"$ZIP_PATH\"\n    \n    # must staple the same dmg that was submitted for notarisation\n    # to staple the bundle inside the dmg too,\n    # one must:\n    # sign the bundle\n    # archive the bundle and notarise the dmg\n    # staple the bundle\n    # archive the bundle and notarise the dmg again\n    # staple the dmg\n    # here, we just staple the dmg. it should be sufficient    \n    \n    #round 2\n    echo \"# staple only the dmg\"\n    echo \"\\r\"\n    echo \"xcrun stapler staple \\\"$DMG_PATH\\\"\"\n    echo \"\\r\"\n    \n    #round 3 (optional)\n    echo \"# staple the bundle and the dmg\"\n    echo \"\\r\"\n    echo \"xcrun stapler staple \\\"$PRODUCT_PATH\\\"\"\n    echo \"rm -f \\\"$DMG_PATH\\\"\"\n    echo \"hdiutil create -format UDBZ -plist -srcfolder  \\\"$PRODUCT_PATH\\\" \\\"$DMG_PATH\\\" \"\n    echo \"xcrun altool --notarize-app --file \\\"$DMG_PATH\\\" --username \\\"$USER_NAME\\\" --password \\\"@keychain:altool\\\" --primary-bundle-id $PRODUCT_BUNDLE_IDENTIFIER.$UUID\"\n    echo \"\\r\"\n    \n    #round 1\n    xcrun altool --notarize-app --file \"$DMG_PATH\" --username \"$USER_NAME\" --password \"@keychain:altool\" --primary-bundle-id $PRODUCT_BUNDLE_IDENTIFIER.$UUID\n    \n    #for round 3    \n    UUID=`uuidgen | tr -d - | tr -d '\\n' | tr '[:upper:]' '[:lower:]'`\nelse\n    echo \"No notarization performed as this is not a release build.\"\nfi\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -489,7 +503,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.2;
+				CURRENT_PROJECT_VERSION = 1.2.1;
 				DEBUGGING_SYMBOLS = YES;
 				DEPLOYMENT_LOCATION = NO;
 				DEVELOPMENT_TEAM = Y69CWUC25B;
@@ -507,7 +521,10 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/a";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/a",
+					"$(PROJECT_DIR)/dylib",
+				);
 				LIBRARY_STYLE = Bundle;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
@@ -539,7 +556,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 1.2;
+				CURRENT_PROJECT_VERSION = 1.2.1;
 				DEPLOYMENT_LOCATION = NO;
 				DEVELOPMENT_TEAM = Y69CWUC25B;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -554,7 +571,10 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/a";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/a",
+					"$(PROJECT_DIR)/dylib",
+				);
 				LIBRARY_STYLE = Bundle;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
@@ -585,7 +605,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1.2;
+				CURRENT_PROJECT_VERSION = 1.2.1;
 				DEPLOYMENT_LOCATION = NO;
 				DEVELOPMENT_TEAM = Y69CWUC25B;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -600,7 +620,10 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/a";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/a",
+					"$(PROJECT_DIR)/dylib",
+				);
 				LIBRARY_STYLE = Bundle;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";

@@ -290,7 +290,7 @@
       <TargetMachine>MachineX86</TargetMachine>
       <EntryPointSymbol>
       </EntryPointSymbol>
-      <AdditionalDependencies>lzma.lib;gif.lib;jpeg.lib;jsoncpp.lib;leptonica-1.78.0.lib;libpng16.lib;tesseract41.lib;tiff.lib;webp.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>lzma.lib;gif.lib;jpeg.lib;jsoncpp.lib;leptonica-1.78.0.lib;libpng16.lib;tesseract.lib;tiff.lib;webp.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>lib\windows</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -314,7 +314,7 @@
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalDependencies>lzma.lib;gif.lib;jpeg.lib;jsoncpp.lib;leptonica-1.78.0.lib;libpng16.lib;tesseract41.lib;tiff.lib;webp.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>lzma.lib;gif.lib;jpeg.lib;jsoncpp.lib;leptonica-1.78.0.lib;libpng16.lib;tesseract.lib;tiff.lib;webp.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>lib\windows64</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

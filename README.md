@@ -8,10 +8,39 @@ OCR by [Tesseract 4.x](https://github.com/tesseract-ocr/tesseract)
 |:------:|:-----:|:---------:|:---------:|
 ||<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|
 
-```
-spctl -a -vv -t install Tesseract.bundle: accepted
-source=Notarized Developer ID
-origin=Developer ID Application: keisuke miyako (Y69CWUC25B)
+### Patches
+
+Defensive code 
+
+```c
+int Dict::case_ok(const WERD_CHOICE &word) const {
+  int state = 0;
+  int x;
+  const UNICHARSET* unicharset = word.unicharset();
+  for (x = 0; x < word.length(); ++x) {
+      
+    UNICHAR_ID ch_id = word.unichar_id(x);
+      
+    if (ch_id != INVALID_UNICHAR_ID
+        && ch_id >= 0) {
+
+        if (unicharset->get_isupper(ch_id))
+          state = case_state_table[state][1];
+        else if (unicharset->get_islower(ch_id))
+          state = case_state_table[state][2];
+        else if (unicharset->get_isdigit(ch_id))
+          state = case_state_table[state][3];
+        else
+          state = case_state_table[state][0];
+        if (state == -1) return false;
+        
+    }else{
+        return false;
+    }
+
+  }
+  return state != 5; // single lower is bad
+}
 ```
 
 ### Version

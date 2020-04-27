@@ -49,10 +49,6 @@ int Dict::case_ok(const WERD_CHOICE &word) const {
 
 ![preemption xx](https://user-images.githubusercontent.com/1725068/41327179-4e839948-6efd-11e8-982b-a670d511e04f.png)
 
-### Releases
-
-[1.0.4](https://github.com/miyako/4d-plugin-tesseract-v2/releases/tag/1.0.4)
-
 ## Syntax
 
 ```
@@ -193,8 +189,6 @@ If (Bool($option.exportPdf.success))
 	OPEN URL($option.output+".pdf")
 End if 
 ```
-
-
 
 See also 
 

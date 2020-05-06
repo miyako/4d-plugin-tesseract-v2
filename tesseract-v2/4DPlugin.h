@@ -8,11 +8,12 @@
  #
  # --------------------------------------------------------------------------------*/
 
+#define NOMINMAX
+
 #include "4DPluginAPI.h"
 
 /* tesseract */
 #include "baseapi.h"
-//#include "basedir.h"
 #include "dict.h"
 #include "osdetect.h"
 #include "renderer.h"

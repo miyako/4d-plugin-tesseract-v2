@@ -39,31 +39,31 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "43F893B3-3460-4A18-9CD5-0613E06EBF24"
+            uuid = "E93C209E-5DEC-4AAD-B0B5-6937C923286D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "4DPlugin.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "611"
-            endingLineNumber = "611"
-            landmarkName = "readImage(api, image, value, i, interval, getComponentImages, osd, level, getBounds)"
+            startingLineNumber = "490"
+            endingLineNumber = "490"
+            landmarkName = "Tesseract(pResult, pParams)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2F284A4F-4FDE-42AF-B1C1-39E3C0E9CDCE"
+            uuid = "A1ADF5CC-844C-4A3C-9C0E-E323B4B8A797"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "4DPlugin.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "522"
-            endingLineNumber = "522"
+            startingLineNumber = "488"
+            endingLineNumber = "488"
             landmarkName = "Tesseract(pResult, pParams)"
             landmarkType = "9">
          </BreakpointContent>

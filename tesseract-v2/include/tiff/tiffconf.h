@@ -27,7 +27,7 @@
 #define TIFF_UINT32_T unsigned int
 
 /* Unsigned 64-bit type */
-#define TIFF_UINT64_T uint64
+#define TIFF_UINT64_T uint64_t
 
 /* Unsigned 8-bit type */
 #define TIFF_UINT8_T unsigned char
@@ -37,15 +37,6 @@
 
 /* Pointer difference type */
 #define TIFF_PTRDIFF_T ptrdiff_t
-
-/* Define to 1 if the system has the type `int16'. */
-/* #undef HAVE_INT16 */
-
-/* Define to 1 if the system has the type `int32'. */
-/* #undef HAVE_INT32 */
-
-/* Define to 1 if the system has the type `int8'. */
-/* #undef HAVE_INT8 */
 
 /* Compatibility stuff. */
 
@@ -64,7 +55,7 @@
 #define CCITT_SUPPORT 1
 
 /* Support JPEG compression (requires IJG JPEG library) */
-/* #undef JPEG_SUPPORT */
+#define JPEG_SUPPORT 1
 
 /* Support JBIG compression (requires JBIG-KIT library) */
 /* #undef JBIG_SUPPORT */
@@ -80,7 +71,7 @@
 
 /* Support Old JPEG compresson (read contrib/ojpeg/README first! Compilation
    fails with unpatched IJG JPEG library) */
-/* #undef OJPEG_SUPPORT */
+#define OJPEG_SUPPORT 1
 
 /* Support Macintosh PackBits algorithm */
 #define PACKBITS_SUPPORT 1

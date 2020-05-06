@@ -87,7 +87,7 @@
  *  file formats before IFF_DEFAULT will remain invariant.
  */
 
-/*! Image file format types */
+/*! Image Formats */
 enum {
     IFF_UNKNOWN        = 0,
     IFF_BMP            = 1,
@@ -111,12 +111,18 @@ enum {
     IFF_SPIX           = 19
 };
 
+/* Convenient macro for checking requested tiff output */
+#define  L_FORMAT_IS_TIFF(f)  ((f) == IFF_TIFF || (f) == IFF_TIFF_PACKBITS || \
+                               (f) == IFF_TIFF_RLE || (f) == IFF_TIFF_G3 || \
+                               (f) == IFF_TIFF_G4 || (f) == IFF_TIFF_LZW || \
+                               (f) == IFF_TIFF_ZIP || (f) == IFF_TIFF_JPEG)
+
 
 /* --------------------------------------------------------------- *
  *                         Format header ids                       *
  * --------------------------------------------------------------- */
 
-/*! Format header ids */
+/*! Header Ids */
 enum {
     BMP_ID             = 0x4d42,     /*!< BM - for bitmaps    */
     TIFF_BIGEND_ID     = 0x4d4d,     /*!< MM - for 'motorola' */
@@ -128,7 +134,7 @@ enum {
  *                Hinting bit flags in jpeg reader                 *
  * --------------------------------------------------------------- */
 
-/*! Hinting bit flags in jpeg reader */
+/*! Jpeg Hints */
 enum {
     L_JPEG_READ_LUMINANCE = 1,   /*!< only want luminance data; no chroma */
     L_JPEG_FAIL_ON_BAD_DATA = 2  /*!< don't return possibly damaged pix */
@@ -139,7 +145,7 @@ enum {
  *                    Pdf formatted encoding types                 *
  * --------------------------------------------------------------- */
 
-/*! Pdf formatted encoding types */
+/*! Pdf Encoding */
 enum {
     L_DEFAULT_ENCODE  = 0,  /*!< use default encoding based on image        */
     L_JPEG_ENCODE     = 1,  /*!< use dct encoding: 8 and 32 bpp, no cmap    */
@@ -190,7 +196,7 @@ typedef struct L_Compressed_Data  L_COMP_DATA;
  *                           Pdf multi image flags                           *
  * ------------------------------------------------------------------------- */
 
-/*! Pdf multi image flags */
+/*! Pdf MultiImage */
 enum {
     L_FIRST_IMAGE   = 1,    /*!< first image to be used                      */
     L_NEXT_IMAGE    = 2,    /*!< intermediate image; not first or last       */

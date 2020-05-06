@@ -12,7 +12,7 @@
 
 /* tesseract */
 #include "baseapi.h"
-#include "basedir.h"
+//#include "basedir.h"
 #include "dict.h"
 #include "osdetect.h"
 #include "renderer.h"
@@ -30,7 +30,7 @@
 //#include "allheaders.h"
 
 #define LIBLEPT_MAJOR_VERSION   1
-#define LIBLEPT_MINOR_VERSION   78
+#define LIBLEPT_MINOR_VERSION   80
 #define LIBLEPT_PATCH_VERSION   0
 
 #ifdef __cplusplus

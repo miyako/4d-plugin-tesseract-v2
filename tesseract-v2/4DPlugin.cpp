@@ -642,7 +642,7 @@ void readImage(tesseract::TessBaseAPI *api, Pix *image, Json::Value& value, Json
                         for (int j = 0; j < boxes->n; j++) {
                             BOX* box = boxaGetBox(boxes, j, L_CLONE);
                             api->SetRectangle(box->x, box->y, box->w, box->h);
-                            char *t = api->GetUTF8Text();
+                            char *t = api->GetUTF8Text(_PA_YieldAbsolute, interval);
                             int conf = api->MeanTextConf();
                             value[i][j] = Json::objectValue;
                             value[i][j]["x"] = box->x;

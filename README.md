@@ -26,8 +26,8 @@ info|TEXT|``JSON``
 
 * Mac: 
 
-``info.version``: 4.1.1
-``info.leptonica``: leptonica-1.80.0
+``info.version``: 4.1.1  
+``info.leptonica``: leptonica-1.80.0  
 ``info.libraries``: libgif 5.2.1 : libjpeg 9d : libpng 1.6.37 : libtiff 4.1.0 : zlib 1.2.11 : libwebp 1.1.0    
 ``info.SIM.isAVX512BWAvailable``: false  
 ``info.SIM.isAVX512FAvailable``: false  
@@ -37,7 +37,7 @@ info|TEXT|``JSON``
 
 * Windows: 
 
-``info.version``: 4.1.0-rc1  
+``info.version``: 4.1.1 
 ``info.leptonica``: leptonica-1.78.0  
 ``info.libraries``: libgif 5.1.4 : libjpeg 6b (libjpeg-turbo 1.5.3) : libpng 1.6.34 : libtiff 4.0.9 : zlib 1.2.11 : libwebp 1.0.0    
 ``info.SIM.isAVX512BWAvailable``: false  

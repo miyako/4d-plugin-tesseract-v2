@@ -100,7 +100,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			yayzIesiQ7oszgPlwK07GMeVVMY=
+			KwJ+e3EK1eGhGnLi0Boo7XcRgSk=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -108,6 +108,10 @@
 		<key>Resources/constants.xlf</key>
 		<data>
 		UbZYnK1QdI2HA5cO0/aNT2a+ucQ=
+		</data>
+		<key>Resources/manifest.json</key>
+		<data>
+		RHJEi1dJNugLDSvJcQN98n0ZGIQ=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -380,11 +384,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			yayzIesiQ7oszgPlwK07GMeVVMY=
+			KwJ+e3EK1eGhGnLi0Boo7XcRgSk=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ld4R9X3VdNBl1e83DwwQfHIgjjb6nVjZTOknl6lJku0=
+			PQ3QRsG4Med450IYbl0V6rhUpFXlL+ss68iKWLTL+bY=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -398,6 +402,17 @@
 			<key>hash2</key>
 			<data>
 			7t2nF9u/4W05GOd8UQ7QAt/PFge16k3ydWYX/6ElmJk=
+			</data>
+		</dict>
+		<key>Resources/manifest.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			RHJEi1dJNugLDSvJcQN98n0ZGIQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			HSQ5aP55kZP6fYklavNXcfv40UyhcmbQJ4RwknjwE5k=
 			</data>
 		</dict>
 		<key>Windows/Tesseract.4DX</key>
@@ -421,15 +436,6 @@
 			<data>
 			8sGhaR4R/6IL5xl52B/xDTeoWPDbNIJ6M2MSWGAAGgc=
 			</data>
-		</dict>
-		<key>manifest.json</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			ctRwviJxM8LBa2aPfDXwc6NJRHw=
-			</data>
-			<key>requirement</key>
-			<string>identifier manifest and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y69CWUC25B</string>
 		</dict>
 	</dict>
 	<key>rules</key>

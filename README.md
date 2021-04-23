@@ -23,7 +23,7 @@ info|TEXT|``JSON``
 
 ``info.version``: 4.1.1  
 ``info.leptonica``: leptonica-1.80.0  
-``info.libraries``: libgif 5.2.1 : libjpeg 9d : libpng 1.6.37 : libtiff 4.1.0 : zlib 1.2.11 : libwebp 1.1.0    
+``info.libraries``: libgif 5.2.1 : libjpeg 9d : libpng 1.6.37 : libtiff 4.1.0 : zlib 1.2.11 : libwebp 1.1.0 : libopenjp2 2.3.1   
 ``info.SIM.isAVX512BWAvailable``: false  
 ``info.SIM.isAVX512FAvailable``: false  
 ``info.SIM.isAVX2Available``: true  

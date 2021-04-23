@@ -59,7 +59,8 @@
 		D1880F4B22238A0800566C1A /* libpng16.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1880F4A22238A0800566C1A /* libpng16.a */; };
 		D1AF54C12454194A0049F360 /* libtesseract.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1AF54B6245409750049F360 /* libtesseract.a */; };
 		D1AF54C42454196E0049F360 /* libcurl.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D1AF54C32454196E0049F360 /* libcurl.tbd */; };
-		D1C0531724629DEA003B9B26 /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1880F442223895B00566C1A /* libjpeg.a */; };
+		D1B511BC26331FC100B81FD3 /* libopenjp2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1B511BB26331FC100B81FD3 /* libopenjp2.a */; };
+		D1B511BE26331FDD00B81FD3 /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1880F442223895B00566C1A /* libjpeg.a */; };
 		D1E8129E24626E660099FBDF /* liblept.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1E8129D24626E660099FBDF /* liblept.a */; };
 		D1E8129F24626E7B0099FBDF /* libgif.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1169E16222418ED00E0B1DD /* libgif.a */; };
 /* End PBXBuildFile section */
@@ -142,6 +143,7 @@
 		D1AF54BD245413FB0049F360 /* libtesseract_ccutil_la-strngs.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = "libtesseract_ccutil_la-strngs.o"; path = "a/libtesseract_ccutil_la-strngs.o"; sourceTree = "<group>"; };
 		D1AF54BF245414650049F360 /* libtesseract_ccutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtesseract_ccutil.a; path = a/libtesseract_ccutil.a; sourceTree = "<group>"; };
 		D1AF54C32454196E0049F360 /* libcurl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurl.tbd; path = usr/lib/libcurl.tbd; sourceTree = SDKROOT; };
+		D1B511BB26331FC100B81FD3 /* libopenjp2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopenjp2.a; path = a/libopenjp2.a; sourceTree = "<group>"; };
 		D1E8129D24626E660099FBDF /* liblept.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblept.a; path = a/liblept.a; sourceTree = "<group>"; };
 		D1E812A024626F690099FBDF /* libturbojpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libturbojpeg.a; path = a/libturbojpeg.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -151,7 +153,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1C0531724629DEA003B9B26 /* libjpeg.a in Frameworks */,
+				D1B511BE26331FDD00B81FD3 /* libjpeg.a in Frameworks */,
+				D1B511BC26331FC100B81FD3 /* libopenjp2.a in Frameworks */,
 				D1E8129F24626E7B0099FBDF /* libgif.a in Frameworks */,
 				D1E8129E24626E660099FBDF /* liblept.a in Frameworks */,
 				D1AF54C42454196E0049F360 /* libcurl.tbd in Frameworks */,
@@ -292,6 +295,7 @@
 		D1880F3D222388C200566C1A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D1B511BB26331FC100B81FD3 /* libopenjp2.a */,
 				D1E812A024626F690099FBDF /* libturbojpeg.a */,
 				D1E8129D24626E660099FBDF /* liblept.a */,
 				D1AF54C32454196E0049F360 /* libcurl.tbd */,
@@ -507,7 +511,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2.0.0;
+				CURRENT_PROJECT_VERSION = 2.1.0;
 				DEBUGGING_SYMBOLS = YES;
 				DEPLOYMENT_LOCATION = NO;
 				DEVELOPMENT_TEAM = Y69CWUC25B;
@@ -560,7 +564,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 2.0.0;
+				CURRENT_PROJECT_VERSION = 2.1.0;
 				DEPLOYMENT_LOCATION = NO;
 				DEVELOPMENT_TEAM = Y69CWUC25B;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -609,7 +613,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2.0.0;
+				CURRENT_PROJECT_VERSION = 2.1.0;
 				DEPLOYMENT_LOCATION = NO;
 				DEVELOPMENT_TEAM = Y69CWUC25B;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -683,7 +687,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OBJROOT = "$(SRCROOT)/build";
 				SDKROOT = macosx;
 				SYMROOT = "$(SRCROOT)/$(PRODUCT_NAME).4dbase/Plugins";
@@ -728,7 +732,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OBJROOT = "$(SRCROOT)/build";
 				SDKROOT = macosx;
 				SYMROOT = "$(SRCROOT)/$(PRODUCT_NAME).4dbase/Plugins";
@@ -772,7 +776,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				SDKROOT = macosx;
 				SYMROOT = "$(SRCROOT)/$(PRODUCT_NAME).4dbase/Plugins";
 				USER_HEADER_SEARCH_PATHS = "include/leptonica include/tesseract include/json include/tiff";

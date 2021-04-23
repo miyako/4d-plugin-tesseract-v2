@@ -103,7 +103,7 @@ void Tesseract_Get_info(sLONG_PTR *pResult, PackagePtr pParams){
     info["SIM"]["isAVX2Available"] = tesseract::SIMDDetect::IsAVX2Available();
     info["SIM"]["isAVXAvailable"] = tesseract::SIMDDetect::IsAVXAvailable();
     info["SIM"]["isSSEAvailable"] = tesseract::SIMDDetect::IsSSEAvailable();
-    
+
     /* leptonica */
     char* leptonicaVersion;
     leptonicaVersion = getLeptonicaVersion();
@@ -309,10 +309,10 @@ void Tesseract(sLONG_PTR *pResult, PackagePtr pParams)
     
     Param1.fromParamAtIndex(pParams, 1);
     Param2.fromParamAtIndex(pParams, 2);
-    
+
     tesseract::Dict::GlobalDawgCache();
     tesseract::TessBaseAPI api;
-    
+
     JSONCPP_STRING lang = "eng";
     JSONCPP_STRING tessdata;
     

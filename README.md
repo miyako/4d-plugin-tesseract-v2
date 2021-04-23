@@ -47,7 +47,7 @@ c.f.
 [SSE](https://en.wikipedia.org/wiki/Streaming_SIMD_Extensions)  
 [AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions)  
 
-**Note**: Jpeg2000 (.jp2) support is disabled (probably not thread-safe)
+**Note**: Jpeg2000 (.jp2) support is disabled on windows (probably not thread-safe)
 
 * leptonica and tesseract are patched to support unicode paths on Windows  
 * tesseract is patched to "yield absolute" during OCR  

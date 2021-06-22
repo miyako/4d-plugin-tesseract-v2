@@ -23,7 +23,7 @@ info|TEXT|``JSON``
 
 ``info.version``: 4.1.1  
 ``info.leptonica``: leptonica-1.80.0  
-``info.libraries``: libgif 5.2.1 : libjpeg 9d : libpng 1.6.37 : libtiff 4.1.0 : zlib 1.2.11 : libwebp 1.1.0    
+``info.libraries``: libgif 5.2.1 : libjpeg 9d : libpng 1.6.37 : libtiff 4.1.0 : zlib 1.2.11 : libwebp 1.1.0 : libopenjp2 2.3.1   
 ``info.SIM.isAVX512BWAvailable``: false  
 ``info.SIM.isAVX512FAvailable``: false  
 ``info.SIM.isAVX2Available``: true  
@@ -47,7 +47,7 @@ c.f.
 [SSE](https://en.wikipedia.org/wiki/Streaming_SIMD_Extensions)  
 [AVX](https://en.wikipedia.org/wiki/Advanced_Vector_Extensions)  
 
-**Note**: Jpeg2000 (.jp2) support is disabled (probably not thread-safe)
+**Note**: Jpeg2000 (.jp2) support is disabled on windows (probably not thread-safe)
 
 * leptonica and tesseract are patched to support unicode paths on Windows  
 * tesseract is patched to "yield absolute" during OCR  

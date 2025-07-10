@@ -1,0 +1,21 @@
+{
+	"messages": [
+		{
+			"message": "Compatibility setting 'Reload form for each record during PRINT SELECTION' switched off.",
+			"severity": "warning"
+		},
+		{
+			"message": "Compatibility setting 'Use LF for end of line on macOS' switched on.",
+			"severity": "warning"
+		},
+		{
+			"message": "Compatibility setting 'Don't add a BOM when writing a unicode text file by default' switched on.",
+			"severity": "warning"
+		},
+		{
+			"message": "Compatibility setting 'Prefer null values than blank values' switched on.",
+			"severity": "warning"
+		}
+	],
+	"success": true
+}

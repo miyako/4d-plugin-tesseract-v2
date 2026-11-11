@@ -63,6 +63,7 @@
 		D1B511BE26331FDD00B81FD3 /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1880F442223895B00566C1A /* libjpeg.a */; };
 		D1E8129E24626E660099FBDF /* liblept.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1E8129D24626E660099FBDF /* liblept.a */; };
 		D1E8129F24626E7B0099FBDF /* libgif.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1169E16222418ED00E0B1DD /* libgif.a */; };
+		B1E5F48DA2C4950271D0812F /* constants.xlf in CopyFiles */ = {isa = PBXBuildFile; fileRef = D14D10DD1A03A8A5008B3411 /* constants.xlf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -72,6 +73,7 @@
 			dstPath = .;
 			dstSubfolderSpec = 7;
 			files = (
+				B1E5F48DA2C4950271D0812F /* constants.xlf in CopyFiles */,
 				D134D4AC1A030BA0008D14EF /* manifest.json in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,22 +132,15 @@
 		D134D4A91A030B06008D14EF /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
 		D14D10DD1A03A8A5008B3411 /* constants.xlf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = constants.xlf; sourceTree = "<group>"; };
 		D175D9CC1A02E8DD0006B569 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		D1880F3E222388C200566C1A /* libleptonica.1.78.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libleptonica.1.78.0.a; path = a/libleptonica.1.78.0.a; sourceTree = "<group>"; };
-		D1880F3F222388C200566C1A /* libtesseract.4.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtesseract.4.1.0.a; path = a/libtesseract.4.1.0.a; sourceTree = "<group>"; };
 		D1880F422223895B00566C1A /* libtiff.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtiff.a; path = a/libtiff.a; sourceTree = "<group>"; };
 		D1880F432223895B00566C1A /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = a/libz.a; sourceTree = "<group>"; };
 		D1880F442223895B00566C1A /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = a/libjpeg.a; sourceTree = "<group>"; };
 		D1880F48222389EC00566C1A /* libwebp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebp.a; path = a/libwebp.a; sourceTree = "<group>"; };
 		D1880F4A22238A0800566C1A /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng16.a; path = a/libpng16.a; sourceTree = "<group>"; };
 		D1AF54B6245409750049F360 /* libtesseract.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtesseract.a; path = a/libtesseract.a; sourceTree = "<group>"; };
-		D1AF54B7245409750049F360 /* libleptonica.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libleptonica.a; path = a/libleptonica.a; sourceTree = "<group>"; };
-		D1AF54BA24540A180049F360 /* libtesseract.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtesseract.5.dylib; path = dylib/libtesseract.5.dylib; sourceTree = "<group>"; };
-		D1AF54BD245413FB0049F360 /* libtesseract_ccutil_la-strngs.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = "libtesseract_ccutil_la-strngs.o"; path = "a/libtesseract_ccutil_la-strngs.o"; sourceTree = "<group>"; };
-		D1AF54BF245414650049F360 /* libtesseract_ccutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtesseract_ccutil.a; path = a/libtesseract_ccutil.a; sourceTree = "<group>"; };
 		D1AF54C32454196E0049F360 /* libcurl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurl.tbd; path = usr/lib/libcurl.tbd; sourceTree = SDKROOT; };
 		D1B511BB26331FC100B81FD3 /* libopenjp2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopenjp2.a; path = a/libopenjp2.a; sourceTree = "<group>"; };
 		D1E8129D24626E660099FBDF /* liblept.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblept.a; path = a/liblept.a; sourceTree = "<group>"; };
-		D1E812A024626F690099FBDF /* libturbojpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libturbojpeg.a; path = a/libturbojpeg.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,13 +291,8 @@
 			isa = PBXGroup;
 			children = (
 				D1B511BB26331FC100B81FD3 /* libopenjp2.a */,
-				D1E812A024626F690099FBDF /* libturbojpeg.a */,
 				D1E8129D24626E660099FBDF /* liblept.a */,
 				D1AF54C32454196E0049F360 /* libcurl.tbd */,
-				D1AF54BF245414650049F360 /* libtesseract_ccutil.a */,
-				D1AF54BD245413FB0049F360 /* libtesseract_ccutil_la-strngs.o */,
-				D1AF54BA24540A180049F360 /* libtesseract.5.dylib */,
-				D1AF54B7245409750049F360 /* libleptonica.a */,
 				D1AF54B6245409750049F360 /* libtesseract.a */,
 				D1169E16222418ED00E0B1DD /* libgif.a */,
 				D1169E1422238D2A00E0B1DD /* libjsoncpp.a */,
@@ -311,8 +301,6 @@
 				D1880F442223895B00566C1A /* libjpeg.a */,
 				D1880F422223895B00566C1A /* libtiff.a */,
 				D1880F432223895B00566C1A /* libz.a */,
-				D1880F3E222388C200566C1A /* libleptonica.1.78.0.a */,
-				D1880F3F222388C200566C1A /* libtesseract.4.1.0.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -531,7 +519,6 @@
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/a",
-					"$(PROJECT_DIR)/dylib",
 				);
 				LIBRARY_STYLE = Bundle;
 				OTHER_CFLAGS = "";
@@ -581,7 +568,6 @@
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/a",
-					"$(PROJECT_DIR)/dylib",
 				);
 				LIBRARY_STYLE = Bundle;
 				OTHER_CFLAGS = "";
@@ -630,7 +616,6 @@
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/a",
-					"$(PROJECT_DIR)/dylib",
 				);
 				LIBRARY_STYLE = Bundle;
 				OTHER_CFLAGS = "";
@@ -653,7 +638,6 @@
 		42D60B440A9DDBC8002ABB42 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -675,6 +659,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
+				CURRENT_PROJECT_VERSION = 2.1.0;
 				DEVELOPMENT_TEAM = Y69CWUC25B;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
@@ -687,7 +672,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MARKETING_VERSION = 2.1.0;
 				OBJROOT = "$(SRCROOT)/build";
 				SDKROOT = macosx;
 				SYMROOT = "$(SRCROOT)/$(PRODUCT_NAME).4dbase/Plugins";
@@ -698,7 +684,6 @@
 		42D60B450A9DDBC8002ABB42 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -720,6 +705,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
+				CURRENT_PROJECT_VERSION = 2.1.0;
 				DEVELOPMENT_TEAM = Y69CWUC25B;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
@@ -732,7 +718,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MARKETING_VERSION = 2.1.0;
 				OBJROOT = "$(SRCROOT)/build";
 				SDKROOT = macosx;
 				SYMROOT = "$(SRCROOT)/$(PRODUCT_NAME).4dbase/Plugins";
@@ -743,7 +730,6 @@
 		42D60B460A9DDBC8002ABB42 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -764,6 +750,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
+				CURRENT_PROJECT_VERSION = 2.1.0;
 				DEVELOPMENT_TEAM = Y69CWUC25B;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
@@ -776,7 +764,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MARKETING_VERSION = 2.1.0;
+				OBJROOT = "$(SRCROOT)/build";
 				SDKROOT = macosx;
 				SYMROOT = "$(SRCROOT)/$(PRODUCT_NAME).4dbase/Plugins";
 				USER_HEADER_SEARCH_PATHS = "include/leptonica include/tesseract include/json include/tiff";

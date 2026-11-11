@@ -1,0 +1,8 @@
+.DS_Store
+build/
+*.4dbase/Logs/
+*.4dbase/userPreferences.*/
+/Tesseract.dmg
+/Tesseract.zip
+Tesseract.4dbase/Plugins/Tesseract.bundle/Contents/MacOS/
+Tesseract.4dbase/Plugins/Tesseract.bundle/Contents/_CodeSignature/

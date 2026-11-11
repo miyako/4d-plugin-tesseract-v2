@@ -123,6 +123,28 @@ jobs:
           Write-Host "PlatformToolset: $toolset"
           "PLATFORM_TOOLSET=$toolset" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
 
+      # lib/Windows64/jsoncpp.lib is built from the jsoncpp 1.9.4 tag (the
+      # version of include/json) and cached; the old committed 1.8.x library
+      # didn't match the headers and failed to link.
+      - name: restore jsoncpp (Windows)
+        id: jsoncpp-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: lib/Windows64/jsoncpp.lib
+          key: win-jsoncpp-${{ env.PLATFORM_TOOLSET }}-${{ hashFiles('scripts/build-windows-jsoncpp.sh') }}
+
+      - name: build jsoncpp (Windows)
+        if: steps.jsoncpp-cache.outputs.cache-hit != 'true'
+        shell: bash
+        run: bash scripts/build-windows-jsoncpp.sh lib/Windows64/jsoncpp.lib "$PLATFORM_TOOLSET"
+
+      - name: save jsoncpp cache
+        if: steps.jsoncpp-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: lib/Windows64/jsoncpp.lib
+          key: win-jsoncpp-${{ env.PLATFORM_TOOLSET }}-${{ hashFiles('scripts/build-windows-jsoncpp.sh') }}
+
       # The vcxproj may pin a legacy toolset (v100/v140) and SDK 8.1 that the
       # runner lacks, so both are overridden on the command line.
       - name: build x64

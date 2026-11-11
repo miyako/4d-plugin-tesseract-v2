@@ -70,6 +70,9 @@ extern "C" {
     LEPT_DLL extern PIX * pixRead ( const char *filename );
     
     LEPT_DLL extern void pixDestroy ( PIX **ppix );
+    LEPT_DLL extern void pixaDestroy ( PIXA **ppixa );
+    LEPT_DLL extern void boxDestroy ( BOX **pbox );
+    LEPT_DLL extern void boxaDestroy ( BOXA **pboxa );
     
     LEPT_DLL extern BOX * boxaGetBox ( BOXA *boxa, l_int32 index, l_int32 accessflag );
     

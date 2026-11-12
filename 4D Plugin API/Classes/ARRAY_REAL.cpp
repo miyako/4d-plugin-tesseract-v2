@@ -7,6 +7,7 @@
  */
 
 #include "ARRAY_REAL.h"
+#include "ArrayOutput.h"
 
 void ARRAY_REAL::fromParamAtIndex(PackagePtr pParams, uint16_t index)
 {	
@@ -18,6 +19,7 @@ void ARRAY_REAL::fromParamAtIndex(PackagePtr pParams, uint16_t index)
 		
 		if(arr.fType == eVK_ArrayReal)
 		{
+			requireArrayInputStorage(arr);
 			uint32_t i;
 			
 			double doubleValue;
@@ -41,24 +43,11 @@ void ARRAY_REAL::toParamAtIndex(PackagePtr pParams, uint16_t index)
 		PA_Variable arr = *((PA_Variable*) pParams[index - 1]);
 		PA_Variable *param = ((PA_Variable *)pParams[index - 1]);
 		
-		switch (arr.fType) 
-		{
-			case eVK_ArrayReal:
-				break;
-			case eVK_Undefined:
-				PA_ClearVariable(&arr);				
-				arr = PA_CreateVariable(eVK_ArrayReal);
-				param->fType = arr.fType;
-				break;				
-				
-			default:
-				break;
-		}
+		prepareArrayOutput(param, eVK_ArrayReal, this->_CDoubleArray->size());
+		arr = *param;
 		
 		if(arr.fType == eVK_ArrayReal)
 		{
-			
-			PA_ResizeArray(&arr, this->_CDoubleArray->empty() ? 0 : (uint32_t)(this->_CDoubleArray->size() - 1));
 			
 			uint32_t i;
 			

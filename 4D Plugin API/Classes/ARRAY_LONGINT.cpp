@@ -7,6 +7,7 @@
  */
 
 #include "ARRAY_LONGINT.h"
+#include "ArrayOutput.h"
 
 void ARRAY_LONGINT::fromParamAtIndex(PackagePtr pParams, uint32_t index)
 {	
@@ -18,6 +19,7 @@ void ARRAY_LONGINT::fromParamAtIndex(PackagePtr pParams, uint32_t index)
 		
 		if(arr.fType == eVK_ArrayLongint)
 		{
+			requireArrayInputStorage(arr);
 			uint32_t i;
 			
 			int intValue;
@@ -41,24 +43,11 @@ void ARRAY_LONGINT::toParamAtIndex(PackagePtr pParams, uint32_t index)
 		PA_Variable arr = *((PA_Variable*) pParams[index - 1]);
 		PA_Variable *param = ((PA_Variable *)pParams[index - 1]);
 		
-		switch (arr.fType) 
-		{
-			case eVK_ArrayLongint:
-				break;
-			case eVK_Undefined:
-				PA_ClearVariable(&arr);
-				arr = PA_CreateVariable(eVK_ArrayLongint);
-				param->fType = arr.fType;
-				break;				
-				
-			default:
-				break;
-		}		
+		prepareArrayOutput(param, eVK_ArrayLongint, this->_CIntArray->size());
+		arr = *param;
 		
 		if(arr.fType == eVK_ArrayLongint)
 		{
-			
-			PA_ResizeArray(&arr, this->_CIntArray->empty() ? 0 : (uint32_t)(this->_CIntArray->size() - 1));
 			
 			uint32_t i;
 			

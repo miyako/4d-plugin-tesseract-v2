@@ -7,6 +7,7 @@
  */
 
 #include "ARRAY_DATE.h"
+#include "ArrayOutput.h"
 
 void ARRAY_DATE::fromParamAtIndex(PackagePtr pParams, uint32_t index)
 {	
@@ -18,6 +19,7 @@ void ARRAY_DATE::fromParamAtIndex(PackagePtr pParams, uint32_t index)
 		
 		if(arr.fType == eVK_ArrayDate)
 		{
+			requireArrayInputStorage(arr);
 			uint32_t i;
 			
 			PA_Date date;
@@ -49,24 +51,11 @@ void ARRAY_DATE::toParamAtIndex(PackagePtr pParams, uint32_t index)
 		PA_Variable arr = *((PA_Variable*) pParams[index - 1]);
 		PA_Variable *param = ((PA_Variable *)pParams[index - 1]);
 		
-		switch (arr.fType) 
-		{
-			case eVK_ArrayDate:
-				break;
-			case eVK_Undefined:
-				PA_ClearVariable(&arr);
-				arr = PA_CreateVariable(eVK_ArrayDate);
-				param->fType = arr.fType;
-				break;				
-				
-			default:
-				break;
-		}		
+		prepareArrayOutput(param, eVK_ArrayDate, this->_CDateArray->size());
+		arr = *param;
 		
 		if(arr.fType == eVK_ArrayDate)
 		{
-			
-			PA_ResizeArray(&arr, this->_CDateArray->empty() ? 0 : (uint32_t)(this->_CDateArray->size() - 1));
 			
 			uint32_t i;
             uint16_t day, month, year;

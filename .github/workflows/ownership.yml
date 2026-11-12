@@ -1,0 +1,34 @@
+name: Ownership regression
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  ownership:
+    runs-on: macos-15
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /4D Plugin API/
+            /4D Plugin_Prefix.pch
+            /4DPlugin.cpp
+            /4DPlugin.h
+            /manifest.json
+            /Tesseract.xcodeproj/project.pbxproj
+            /Tesseract.vcxproj
+            /Tesseract.vc10.vcxproj
+            /include/leptonica/
+            /include/tiff/
+            /tests/ownership/
+      - name: Synthetic actual-source ownership checks
+        run: python3 tests/ownership/run.py

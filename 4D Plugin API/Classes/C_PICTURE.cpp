@@ -7,6 +7,33 @@
  */
 
 #include "C_PICTURE.h"
+#include <stdexcept>
+#include <string>
+
+namespace {
+class PictureArguments {
+	PA_Variable values[4];
+	short count;
+public:
+	explicit PictureArguments(short n) : count(n) {
+		for (short i = 0; i < count; ++i)
+			values[i] = PA_CreateVariable(eVK_Undefined);
+	}
+	~PictureArguments() {
+		for (short i = 0; i < count; ++i) PA_ClearVariable(&values[i]);
+	}
+	PA_Variable& operator[](size_t i) { return values[i]; }
+	void execute(PA_long32 command) {
+		PA_Variable result = PA_ExecuteCommandByID(command, values, count);
+		const PA_ErrorCode error = PA_GetLastError();
+		if (error != eER_NoErr)
+			throw std::runtime_error("4D picture command failed: " + std::to_string(error));
+		PA_ClearVariable(&result);
+	}
+	PictureArguments(const PictureArguments&) = delete;
+	PictureArguments& operator=(const PictureArguments&) = delete;
+};
+}
 
 #define CMU_TRANSFORM_PICTURE 988
 #define CMU_PICTURE_PROPERTIES 457
@@ -88,9 +115,10 @@ bool CPicture::loadImageOfType(CUTF8String *pType)
 				result = true;
 			}else{
 				
-				this->_TypeNum = pos;	
-				
 				PA_Handle h = PA_NewHandle(0);	
+				const PA_ErrorCode allocationError = PA_GetLastError();
+				if (allocationError != eER_NoErr)
+					throw std::runtime_error("4D picture handle allocation failed: " + std::to_string(allocationError));
 				
 				err = eER_NoErr;
 				PA_GetPictureData(this->_CPicture, pos, h);
@@ -102,6 +130,7 @@ bool CPicture::loadImageOfType(CUTF8String *pType)
 					PA_UnlockHandle(h);
 					
 					this->_Type = CUTF8String(pType->c_str());
+					this->_TypeNum = pos;
 					result = true;
 				}
 				PA_DisposeHandle(h);
@@ -122,31 +151,26 @@ void CPicture::fromFileAtPath(CUTF8String *pFilePath)
 	
 	PA_Unistring _path = PA_CreateUnistring((PA_Unichar *)filePath.getUTF16StringPtr());
 	
-	PA_Variable args[2];
-	args[0] = PA_CreateVariable(eVK_Unistring);
+	PictureArguments args(2);
 	PA_SetStringVariable(&args[0], &_path);
 	args[1] = PA_CreateVariable(eVK_Picture);
 	
-	PA_ExecuteCommandByID(678, args, 2);
+	args.execute(678);
 	
 	PA_Picture p = PA_GetPictureVariable(args[1]);
 	
-	PA_DisposeUnistring(&_path);
-	
-	PA_ClearVariable(&args[0]);
-	
 	setPicture(p);
-	
-//	PA_ClearVariable(&args[1]);	
-//	belongs to 4D? should not release
 	
 }
 
 void CPicture::setBytes(const uint8_t *bytes, uint32_t len)
 {
 	PA_Picture p = PA_CreatePicture((void *)bytes, len);
-	
+	const PA_ErrorCode error = PA_GetLastError();
+	if (error != eER_NoErr)
+		throw std::runtime_error("4D picture creation failed: " + std::to_string(error));
 	setPicture(p);	
+	PA_DisposePicture(p);
 }
 
 const uint8_t *CPicture::getBytesPtr(CUTF8String *pType)
@@ -246,7 +270,10 @@ PA_Picture CPicture::createCopy(const char* type)
                                               size,
                                               eVTC_UTF_16
                                               );    
-    CUTF16String u16 = CUTF16String((const PA_Unichar *)&buf[0], len);	
+    const PA_ErrorCode error = PA_GetLastError();
+    if (error != eER_NoErr || len > size || len % sizeof(PA_Unichar))
+        throw std::runtime_error("4D picture type conversion failed: " + std::to_string(error));
+    CUTF16String u16 = CUTF16String((const PA_Unichar *)&buf[0], len / sizeof(PA_Unichar));
     
     PA_Unistring u = PA_CreateUnistring((PA_Unichar*)u16.c_str());
     
@@ -254,20 +281,16 @@ PA_Picture CPicture::createCopy(const char* type)
     
     p = PA_DuplicatePicture(this->_CPicture, 1);
     
-    PA_Variable args[2];
-    args[0] = PA_CreateVariable(eVK_Picture);
+    PictureArguments args(2);
     PA_SetPictureVariable(&args[0], p);
-    args[1] = PA_CreateVariable(eVK_Unistring);
     
     PA_SetStringVariable(&args[1], &u);
-    PA_ExecuteCommandByID(CMU_CONVERT_PICTURE, args, 2);
+    args.execute(CMU_CONVERT_PICTURE);
     
     p = PA_GetPictureVariable(args[0]);
     
     PA_SetPictureVariable(&args[0], NULL);
     
-    PA_ClearVariable(&args[0]);	
-    PA_ClearVariable(&args[1]);
     
     return p;    
 }
@@ -278,22 +301,18 @@ PA_Picture CPicture::createGrayScale()
 	
 	p = PA_DuplicatePicture(this->_CPicture, 1);
 	
-	PA_Variable args[2];
-	
-	args[0] = PA_CreateVariable(eVK_Picture);
+	PictureArguments args(2);
 	args[1] = PA_CreateVariable(eVK_Longint);
 	
 	PA_SetPictureVariable(&args[0], p);	
 	PA_SetLongintVariable(&args[1], 101);
 	
-	PA_ExecuteCommandByID(CMU_TRANSFORM_PICTURE, args, 2);
+	args.execute(CMU_TRANSFORM_PICTURE);
 	
 	p = PA_GetPictureVariable(args[0]);
 
 	PA_SetPictureVariable(&args[0], NULL);
 	
-	PA_ClearVariable(&args[0]);	
-	PA_ClearVariable(&args[1]);
 	
 	return p;	
 }
@@ -344,51 +363,36 @@ void CPicture::setImage(NSImage *image)
 
 void CPicture::getSize(unsigned int *width, unsigned int *height)
 {
-	PA_Variable args[3];
-	
-	args[0] = PA_CreateVariable(eVK_Picture);
+	PictureArguments args(3);
 	args[1] = PA_CreateVariable(eVK_Longint);		
 	args[2] = PA_CreateVariable(eVK_Longint);	
 	
-	PA_SetPictureVariable(&args[0], this->_CPicture);
+	PA_SetPictureVariable(&args[0], PA_DuplicatePicture(this->_CPicture, 1));
 	
-	PA_ExecuteCommandByID(CMU_PICTURE_PROPERTIES, args, 3);
-	
-	PA_SetPictureVariable(&args[0], NULL);	
+	args.execute(CMU_PICTURE_PROPERTIES);
 	
 	*width = PA_GetLongintVariable(args[1]);
 	*height = PA_GetLongintVariable(args[2]);	
 	
-	PA_ClearVariable(&args[0]);		
-	PA_ClearVariable(&args[1]);
-	PA_ClearVariable(&args[2]);	
 }
 
 PA_Picture CPicture::createThumbnail(unsigned int width, unsigned int height)
 {
 	PA_Picture p;
-	PA_Variable args[4];
-	
-	args[0] = PA_CreateVariable(eVK_Picture);
+	PictureArguments args(4);
 	args[1] = PA_CreateVariable(eVK_Picture);	
 	args[2] = PA_CreateVariable(eVK_Longint);		
 	args[3] = PA_CreateVariable(eVK_Longint);	
 	
-	PA_SetPictureVariable(&args[0], this->_CPicture);
+	PA_SetPictureVariable(&args[0], PA_DuplicatePicture(this->_CPicture, 1));
 	PA_SetLongintVariable(&args[2], width);
 	PA_SetLongintVariable(&args[3], height);	
 	
-	PA_ExecuteCommandByID(CMU_CREATE_THUMBNAIL, args, 4);
+	args.execute(CMU_CREATE_THUMBNAIL);
 	
 	p = PA_GetPictureVariable(args[1]);
 	
-	PA_SetPictureVariable(&args[0], NULL);	
 	PA_SetPictureVariable(&args[1], NULL);		
-	
-	PA_ClearVariable(&args[0]);		
-	PA_ClearVariable(&args[1]);
-	PA_ClearVariable(&args[2]);
-	PA_ClearVariable(&args[3]);	
 	
 	return p;
 }

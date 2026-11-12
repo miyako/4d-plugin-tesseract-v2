@@ -49,7 +49,7 @@ void convertFromString(std::string &fromString, CUTF16String &toString){
     if(len){
         std::vector<uint8_t> buf((len + 1) * sizeof(PA_Unichar));
         if(MultiByteToWideChar(CP_UTF8, 0, (LPCSTR)fromString.c_str(), fromString.length(), (LPWSTR)&buf[0], len)){
-            toString = CUTF16String((const PA_Unichar *)&buf[0]);
+            toString = CUTF16String((const PA_Unichar *)&buf[0], len);
         }
     }else{
         toString = CUTF16String((const PA_Unichar *)L"\0\0");
@@ -60,7 +60,7 @@ void convertFromString(std::string &fromString, CUTF16String &toString){
         int len = CFStringGetLength(str);
         std::vector<uint8_t> buf((len+1) * sizeof(PA_Unichar));
         CFStringGetCharacters(str, CFRangeMake(0, len), (UniChar *)&buf[0]);
-        toString = CUTF16String((const PA_Unichar *)&buf[0]);
+        toString = CUTF16String((const PA_Unichar *)&buf[0], len);
         CFRelease(str);
     }
 #endif

@@ -7,6 +7,7 @@
  */
 
 #include "ARRAY_BOOLEAN.h"
+#include "ArrayOutput.h"
 
 static unsigned char tabTrue [ 8 ] = { 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80 };
 
@@ -25,6 +26,7 @@ void ARRAY_BOOLEAN::fromParamAtIndex(PackagePtr pParams, uint16_t index)
 		
 		if(arr.fType == eVK_ArrayBoolean)
 		{
+			requireArrayInputStorage(arr);
 			uint32_t i;
 			
 			bool booleanValue;
@@ -48,24 +50,11 @@ void ARRAY_BOOLEAN::toParamAtIndex(PackagePtr pParams, uint16_t index)
 		PA_Variable arr = *((PA_Variable*) pParams[index - 1]);
 		PA_Variable *param = ((PA_Variable *)pParams[index - 1]);
 		
-		switch (arr.fType) 
-		{
-			case eVK_ArrayBoolean:
-				break;
-			case eVK_Undefined:
-				PA_ClearVariable(&arr);				
-				arr = PA_CreateVariable(eVK_ArrayBoolean);
-				param->fType = arr.fType;
-				break;				
-				
-			default:
-				break;
-		}
+		prepareArrayOutput(param, eVK_ArrayBoolean, this->_CboolArray->size());
+		arr = *param;
 		
 		if(arr.fType == eVK_ArrayBoolean)
 		{
-			
-			PA_ResizeArray(&arr, this->_CboolArray->empty() ? 0 : (uint32_t)(this->_CboolArray->size() - 1));
 			
 			uint32_t i;
 			

@@ -7,6 +7,8 @@
  */
 
 #include "C_BLOB.h"
+#include <stdexcept>
+#include <string>
 
 /* PA_YieldAbsolute isn't allowed in preemptive mode */
 
@@ -16,6 +18,8 @@ void CBytes::fromParamAtIndex(PA_PluginParameters params, uint32_t index)
 {
 	if(index)
 	{
+		this->_CBytes.clear();
+		this->_cursorPosition = 0;
 		void *bytes = NULL;
 		PA_long32 len = PA_GetBlobParameter(params, index, bytes);
 		if(len)
@@ -34,13 +38,15 @@ void CBytes::fromParamAtIndex(PackagePtr pParams, uint32_t index)
 {
 	if(index)
 	{		
+		this->_CBytes.clear();
+		this->_cursorPosition = 0;
 		PA_Handle h = *(PA_Handle *)(pParams[index - 1]);
 		if(h)//	the handle could be NULL if the BLOB is empty on windows
 		{
 			unsigned int size = PA_GetHandleSize(h);
 			
 			this->_CBytes.resize(size);
-			memmove((char *)&this->_CBytes[0], PA_LockHandle(h), size);
+			if (size) memmove((char *)&this->_CBytes[0], PA_LockHandle(h), size);
 //		PA_MoveBlock(PA_LockHandle(h), (char *)&this->_CBytes[0], size);
 			PA_UnlockHandle(h);
 		}
@@ -53,11 +59,10 @@ void CBytes::toParamAtIndex(PackagePtr pParams, uint32_t index)
 	{
 		PA_Handle *h = (PA_Handle *)(pParams[index - 1]);
 		
-		if (*h) PA_DisposeHandle(*h);
-				
 		PA_Handle d = PA_NewHandle((unsigned int)this->_CBytes.size());
+		const PA_ErrorCode error = PA_GetLastError();
 		/* PA_NewHandle can fail before ACI0098388 */
-		if(eER_NoErr == PA_GetLastError())
+		if(eER_NoErr == error)
 		{
 			if(this->_CBytes.size())//  0 is apparently a range violation on windows
 			{
@@ -66,24 +71,33 @@ void CBytes::toParamAtIndex(PackagePtr pParams, uint32_t index)
 				PA_UnlockHandle(d);
 			}
 			
+			if (*h) PA_DisposeHandle(*h);
 			*h = d;
 		}
+		else throw std::runtime_error("4D BLOB allocation failed: " + std::to_string(error));
 	}
 }
 
 void CBytes::setBytes(const uint8_t *bytes, unsigned int len)
 {	
+	if (!bytes || !len)
+	{
+		this->_CBytes.clear();
+		this->_cursorPosition = 0;
+		return;
+	}
 	if(bytes)
 	{
 		this->_CBytes.resize(len);
 		memmove((char *)&this->_CBytes[0], (void *)bytes, len);
+		this->_cursorPosition = 0;
 //	PA_MoveBlock((void *)bytes, (char *)&this->_CBytes[0], len);
 	}
 }
 
 void CBytes::addBytes(const uint8_t *bytes, unsigned int len)
 {	
-	if(bytes)
+	if(bytes && len)
 	{
 		unsigned int originalSize = this->_CBytes.size();
 		this->_CBytes.resize(originalSize + len);
@@ -98,8 +112,9 @@ void CBytes::setReturn(sLONG_PTR *pResult)
 	PA_Handle *h = (PA_Handle *)pResult;
 	
 	PA_Handle d = PA_NewHandle((unsigned int)this->_CBytes.size());
+	const PA_ErrorCode error = PA_GetLastError();
 	/* PA_NewHandle can fail before ACI0098388 */
-	if(eER_NoErr == PA_GetLastError())
+	if(eER_NoErr == error)
 	{
 		if(this->_CBytes.size())//  0 is apparently a range violation on windows
 		{
@@ -109,6 +124,7 @@ void CBytes::setReturn(sLONG_PTR *pResult)
 		}
 		*h = d;
 	}
+	else throw std::runtime_error("4D BLOB allocation failed: " + std::to_string(error));
 
 }
 
@@ -128,7 +144,8 @@ uint32_t CBytes::getBytesLength()
 const uint8_t *CBytes::getBytesPtrForSize(uint32_t *size)
 {
 
-	int len = this->_CBytes.size() - this->_cursorPosition;
+	size_t len = this->_cursorPosition < this->_CBytes.size()
+		? this->_CBytes.size() - this->_cursorPosition : 0;
 	const uint8_t *ptr = NULL;
 	
 	if(len > 0){
@@ -176,6 +193,7 @@ void CBytes::toHexText(C_TEXT *hex)
 
 void CBytes::fromHexText(C_TEXT *hex)
 {
+	this->_cursorPosition = 0;
 	CUTF8String t;
 	hex->copyUTF8String(&t);	
 	
@@ -243,6 +261,8 @@ static const char reverse_table[128] = {
 
 void CBytes::fromB64Text(C_TEXT *b64)
 {
+	this->_CBytes.clear();
+	this->_cursorPosition = 0;
 	CUTF8String t;
 	b64->copyUTF8String(&t);
 	

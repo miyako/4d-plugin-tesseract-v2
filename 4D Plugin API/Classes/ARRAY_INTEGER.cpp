@@ -7,6 +7,7 @@
  */
 
 #include "ARRAY_INTEGER.h"
+#include "ArrayOutput.h"
 
 void ARRAY_INTEGER::fromParamAtIndex(PackagePtr pParams, uint16_t index)
 {	
@@ -18,6 +19,7 @@ void ARRAY_INTEGER::fromParamAtIndex(PackagePtr pParams, uint16_t index)
 		
 		if(arr.fType == eVK_ArrayInteger)
 		{
+			requireArrayInputStorage(arr);
 			uint32_t i;
 			
 			short shortValue;
@@ -41,24 +43,11 @@ void ARRAY_INTEGER::toParamAtIndex(PackagePtr pParams, uint16_t index)
 		PA_Variable arr = *((PA_Variable*) pParams[index - 1]);
 		PA_Variable *param = ((PA_Variable *)pParams[index - 1]);
 		
-		switch (arr.fType) 
-		{
-			case eVK_ArrayInteger:
-				break;
-			case eVK_Undefined:
-				PA_ClearVariable(&arr);
-				arr = PA_CreateVariable(eVK_ArrayInteger);
-				param->fType = arr.fType;
-				break;				
-				
-			default:
-				break;
-		}
+		prepareArrayOutput(param, eVK_ArrayInteger, this->_CShortArray->size());
+		arr = *param;
 		
 		if(arr.fType == eVK_ArrayInteger)
 		{
-			
-			PA_ResizeArray(&arr, this->_CShortArray->empty() ? 0 : (uint32_t)(this->_CShortArray->size() - 1));
 			
 			uint32_t i;
 			
